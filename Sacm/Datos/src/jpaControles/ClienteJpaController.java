@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos;
+package jpaControles;
 
-import datos.exceptions.IllegalOrphanException;
-import datos.exceptions.NonexistentEntityException;
-import datos.exceptions.PreexistingEntityException;
+import exceptions.IllegalOrphanException;
+import exceptions.NonexistentEntityException;
+import exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -19,6 +19,7 @@ import java.util.List;
 import dominio.Cita;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -26,8 +27,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class ClienteJpaController implements Serializable {
 
-    public ClienteJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public ClienteJpaController() {
+        this.emf = this.emf = Persistence.createEntityManagerFactory("DatosPU");
     }
     private EntityManagerFactory emf = null;
 

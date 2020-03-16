@@ -1,4 +1,4 @@
-package datos.exceptions;
+package exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

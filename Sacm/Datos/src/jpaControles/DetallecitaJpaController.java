@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos;
+package jpaControles;
 
-import datos.exceptions.NonexistentEntityException;
-import datos.exceptions.PreexistingEntityException;
+import exceptions.NonexistentEntityException;
+import exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -18,6 +18,7 @@ import dominio.Servicioderelajacion;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -25,8 +26,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class DetallecitaJpaController implements Serializable {
 
-    public DetallecitaJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public DetallecitaJpaController() {
+        this.emf = this.emf = Persistence.createEntityManagerFactory("DatosPU");
     }
     private EntityManagerFactory emf = null;
 
