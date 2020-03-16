@@ -9,15 +9,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,18 +26,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Usuario
+ * @author pc
  */
 @Entity
 @Table(name = "cita")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cita.findAll", query = "SELECT c FROM Cita c")
-    , @NamedQuery(name = "Cita.findByIdCita", query = "SELECT c FROM Cita c WHERE c.idCita = :idCita")
-    , @NamedQuery(name = "Cita.findByFecha", query = "SELECT c FROM Cita c WHERE c.fecha = :fecha")
-    , @NamedQuery(name = "Cita.findByHora", query = "SELECT c FROM Cita c WHERE c.hora = :hora")
-    , @NamedQuery(name = "Cita.findByDuracion", query = "SELECT c FROM Cita c WHERE c.duracion = :duracion")
-    , @NamedQuery(name = "Cita.findByCostoTotal", query = "SELECT c FROM Cita c WHERE c.costoTotal = :costoTotal")})
+    @NamedQuery(name = "Cita.findAll", query = "SELECT c FROM Cita c"),
+    @NamedQuery(name = "Cita.findByIdCita", query = "SELECT c FROM Cita c WHERE c.idCita = :idCita"),
+    @NamedQuery(name = "Cita.findByFecha", query = "SELECT c FROM Cita c WHERE c.fecha = :fecha"),
+    @NamedQuery(name = "Cita.findByHora", query = "SELECT c FROM Cita c WHERE c.hora = :hora"),
+    @NamedQuery(name = "Cita.findByDuracion", query = "SELECT c FROM Cita c WHERE c.duracion = :duracion"),
+    @NamedQuery(name = "Cita.findByCostoTotal", query = "SELECT c FROM Cita c WHERE c.costoTotal = :costoTotal")})
 public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,11 +57,8 @@ public class Cita implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costoTotal")
     private Float costoTotal;
-    @JoinTable(name = "detallecita", joinColumns = {
-        @JoinColumn(name = "idCita", referencedColumnName = "idCita")}, inverseJoinColumns = {
-        @JoinColumn(name = "idServicioDeRelajacion", referencedColumnName = "idServicioDeRelajacion")})
-    @ManyToMany
-    private List<Servicioderelajacion> servicioderelajacionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCita")
+    private List<Detallecita> detallecitaList;
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     @ManyToOne(optional = false)
     private Cliente idCliente;
@@ -114,12 +111,12 @@ public class Cita implements Serializable {
     }
 
     @XmlTransient
-    public List<Servicioderelajacion> getServicioderelajacionList() {
-        return servicioderelajacionList;
+    public List<Detallecita> getDetallecitaList() {
+        return detallecitaList;
     }
 
-    public void setServicioderelajacionList(List<Servicioderelajacion> servicioderelajacionList) {
-        this.servicioderelajacionList = servicioderelajacionList;
+    public void setDetallecitaList(List<Detallecita> detallecitaList) {
+        this.detallecitaList = detallecitaList;
     }
 
     public Cliente getIdCliente() {

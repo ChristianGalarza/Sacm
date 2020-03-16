@@ -9,12 +9,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,17 +24,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Usuario
+ * @author pc
  */
 @Entity
 @Table(name = "servicioderelajacion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Servicioderelajacion.findAll", query = "SELECT s FROM Servicioderelajacion s")
-    , @NamedQuery(name = "Servicioderelajacion.findByIdServicioDeRelajacion", query = "SELECT s FROM Servicioderelajacion s WHERE s.idServicioDeRelajacion = :idServicioDeRelajacion")
-    , @NamedQuery(name = "Servicioderelajacion.findByNombre", query = "SELECT s FROM Servicioderelajacion s WHERE s.nombre = :nombre")
-    , @NamedQuery(name = "Servicioderelajacion.findByDuracion", query = "SELECT s FROM Servicioderelajacion s WHERE s.duracion = :duracion")
-    , @NamedQuery(name = "Servicioderelajacion.findByCosto", query = "SELECT s FROM Servicioderelajacion s WHERE s.costo = :costo")})
+    @NamedQuery(name = "Servicioderelajacion.findAll", query = "SELECT s FROM Servicioderelajacion s"),
+    @NamedQuery(name = "Servicioderelajacion.findByIdServicioDeRelajacion", query = "SELECT s FROM Servicioderelajacion s WHERE s.idServicioDeRelajacion = :idServicioDeRelajacion"),
+    @NamedQuery(name = "Servicioderelajacion.findByNombre", query = "SELECT s FROM Servicioderelajacion s WHERE s.nombre = :nombre"),
+    @NamedQuery(name = "Servicioderelajacion.findByDuracion", query = "SELECT s FROM Servicioderelajacion s WHERE s.duracion = :duracion"),
+    @NamedQuery(name = "Servicioderelajacion.findByCosto", query = "SELECT s FROM Servicioderelajacion s WHERE s.costo = :costo")})
 public class Servicioderelajacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,8 +50,8 @@ public class Servicioderelajacion implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costo")
     private Float costo;
-    @ManyToMany(mappedBy = "servicioderelajacionList")
-    private List<Cita> citaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idServicioDeRelajacion")
+    private List<Detallecita> detallecitaList;
 
     public Servicioderelajacion() {
     }
@@ -92,12 +93,12 @@ public class Servicioderelajacion implements Serializable {
     }
 
     @XmlTransient
-    public List<Cita> getCitaList() {
-        return citaList;
+    public List<Detallecita> getDetallecitaList() {
+        return detallecitaList;
     }
 
-    public void setCitaList(List<Cita> citaList) {
-        this.citaList = citaList;
+    public void setDetallecitaList(List<Detallecita> detallecitaList) {
+        this.detallecitaList = detallecitaList;
     }
 
     @Override
