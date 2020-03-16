@@ -8,6 +8,7 @@ package dominio;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -64,11 +65,24 @@ public class Cita implements Serializable {
     private Cliente idCliente;
 
     public Cita() {
+        
     }
 
     public Cita(String idCita) {
         this.idCita = idCita;
     }
+
+    public Cita(String idCita, Date fecha, Date hora, Date duracion, Float costoTotal, List<Detallecita> detallecitaList, Cliente idCliente) {
+        this.idCita = idCita;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.duracion = duracion;
+        this.costoTotal = costoTotal;
+        this.detallecitaList = detallecitaList;
+        this.idCliente = idCliente;
+    }
+    
+    
 
     public String getIdCita() {
         return idCita;
@@ -129,27 +143,34 @@ public class Cita implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idCita != null ? idCita.hashCode() : 0);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.idCita);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cita)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Cita other = (Cita) object;
-        if ((this.idCita == null && other.idCita != null) || (this.idCita != null && !this.idCita.equals(other.idCita))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cita other = (Cita) obj;
+        if (!Objects.equals(this.idCita, other.idCita)) {
             return false;
         }
         return true;
     }
 
+    
+
     @Override
     public String toString() {
-        return "dominio.Cita[ idCita=" + idCita + " ]";
+        return this.idCita+" "+this.getIdCliente().getIdCliente();
     }
     
 }

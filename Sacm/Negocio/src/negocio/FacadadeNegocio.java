@@ -5,8 +5,6 @@
  */
 package negocio;
 
-import datos.FacadadeDatos;
-import datos.IFacadeDatos;
 import dominio.Cita;
 import java.util.List;
 
@@ -14,32 +12,39 @@ import java.util.List;
  *
  * @author pc
  */
-public class CitaControl {
-    
-    private IFacadeDatos facadadeDatos;
+public class FacadadeNegocio implements IFacadadeNegocio{
 
-    public CitaControl() {
-        this.facadadeDatos = new FacadadeDatos();
+    private CitaControl citaControl;
+
+    public FacadadeNegocio() {
+        this.citaControl = new CitaControl();
     }
 
+    @Override
     public List<Cita> obtenerCitas() {
-        return this.facadadeDatos.obtenerCitas();
+        return this.citaControl.obtenerCitas();
     }
     
+    @Override
     public void agregarCita(Cita cita) {
-        this.facadadeDatos.agregarCita(cita);
+        this.citaControl.agregarCita(cita);
     }
     
+    @Override
     public void actualizarCita(Cita cita) {
-        this.facadadeDatos.actualizarCita(cita);
+        this.citaControl.actualizarCita(cita);
     }
 
     
+    @Override
     public void eliminarCita(String id) {
-        this.facadadeDatos.eliminarCita(id);
+        this.citaControl.eliminarCita(id);
     }
 
+    @Override
     public Cita obtenerCita(String id) {
-        return this.facadadeDatos.obtenerCita(id);
+        return this.citaControl.obtenerCita(id);
     }
+    
+    
 }

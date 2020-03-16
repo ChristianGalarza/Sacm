@@ -13,6 +13,7 @@ import java.util.List;
  * @author pc
  */
 public class FacadadeDatos implements IFacadeDatos{
+    
     private DAOBase<Cita> daoCita;
 
     public FacadadeDatos() {

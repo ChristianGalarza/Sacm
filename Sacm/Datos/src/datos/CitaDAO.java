@@ -19,7 +19,11 @@ import jpaControles.CitaJpaController;
  */
 public class CitaDAO extends DAOBase<Cita>{
     
-    CitaJpaController cjc = new CitaJpaController();
+    private CitaJpaController cjc;
+
+    public CitaDAO() {
+        this.cjc = new CitaJpaController();
+    }
 
     @Override
     public List<Cita> obtenerTodos() {
