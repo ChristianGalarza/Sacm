@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jpaControles;
+package controlesJPA;
 
-import exceptions.IllegalOrphanException;
-import exceptions.NonexistentEntityException;
-import exceptions.PreexistingEntityException;
+import controlesJPA.exceptions.NonexistentEntityException;
 import dominio.Cita;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -15,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import dominio.Cliente;
-import dominio.Detallecita;
+import dominio.Servicioderelajacion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -37,9 +35,9 @@ public class CitaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Cita cita) throws PreexistingEntityException, Exception {
-        if (cita.getDetallecitaList() == null) {
-            cita.setDetallecitaList(new ArrayList<Detallecita>());
+    public void create(Cita cita) {
+        if (cita.getServicioderelajacionList() == null) {
+            cita.setServicioderelajacionList(new ArrayList<Servicioderelajacion>());
         }
         EntityManager em = null;
         try {
@@ -50,32 +48,22 @@ public class CitaJpaController implements Serializable {
                 idCliente = em.getReference(idCliente.getClass(), idCliente.getIdCliente());
                 cita.setIdCliente(idCliente);
             }
-            List<Detallecita> attachedDetallecitaList = new ArrayList<Detallecita>();
-            for (Detallecita detallecitaListDetallecitaToAttach : cita.getDetallecitaList()) {
-                detallecitaListDetallecitaToAttach = em.getReference(detallecitaListDetallecitaToAttach.getClass(), detallecitaListDetallecitaToAttach.getIdDetalleCita());
-                attachedDetallecitaList.add(detallecitaListDetallecitaToAttach);
+            List<Servicioderelajacion> attachedServicioderelajacionList = new ArrayList<Servicioderelajacion>();
+            for (Servicioderelajacion servicioderelajacionListServicioderelajacionToAttach : cita.getServicioderelajacionList()) {
+                servicioderelajacionListServicioderelajacionToAttach = em.getReference(servicioderelajacionListServicioderelajacionToAttach.getClass(), servicioderelajacionListServicioderelajacionToAttach.getIdServicioDeRelajacion());
+                attachedServicioderelajacionList.add(servicioderelajacionListServicioderelajacionToAttach);
             }
-            cita.setDetallecitaList(attachedDetallecitaList);
+            cita.setServicioderelajacionList(attachedServicioderelajacionList);
             em.persist(cita);
             if (idCliente != null) {
                 idCliente.getCitaList().add(cita);
                 idCliente = em.merge(idCliente);
             }
-            for (Detallecita detallecitaListDetallecita : cita.getDetallecitaList()) {
-                Cita oldIdCitaOfDetallecitaListDetallecita = detallecitaListDetallecita.getIdCita();
-                detallecitaListDetallecita.setIdCita(cita);
-                detallecitaListDetallecita = em.merge(detallecitaListDetallecita);
-                if (oldIdCitaOfDetallecitaListDetallecita != null) {
-                    oldIdCitaOfDetallecitaListDetallecita.getDetallecitaList().remove(detallecitaListDetallecita);
-                    oldIdCitaOfDetallecitaListDetallecita = em.merge(oldIdCitaOfDetallecitaListDetallecita);
-                }
+            for (Servicioderelajacion servicioderelajacionListServicioderelajacion : cita.getServicioderelajacionList()) {
+                servicioderelajacionListServicioderelajacion.getCitaList().add(cita);
+                servicioderelajacionListServicioderelajacion = em.merge(servicioderelajacionListServicioderelajacion);
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findCita(cita.getIdCita()) != null) {
-                throw new PreexistingEntityException("Cita " + cita + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -83,7 +71,7 @@ public class CitaJpaController implements Serializable {
         }
     }
 
-    public void edit(Cita cita) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Cita cita) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -91,31 +79,19 @@ public class CitaJpaController implements Serializable {
             Cita persistentCita = em.find(Cita.class, cita.getIdCita());
             Cliente idClienteOld = persistentCita.getIdCliente();
             Cliente idClienteNew = cita.getIdCliente();
-            List<Detallecita> detallecitaListOld = persistentCita.getDetallecitaList();
-            List<Detallecita> detallecitaListNew = cita.getDetallecitaList();
-            List<String> illegalOrphanMessages = null;
-            for (Detallecita detallecitaListOldDetallecita : detallecitaListOld) {
-                if (!detallecitaListNew.contains(detallecitaListOldDetallecita)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Detallecita " + detallecitaListOldDetallecita + " since its idCita field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
+            List<Servicioderelajacion> servicioderelajacionListOld = persistentCita.getServicioderelajacionList();
+            List<Servicioderelajacion> servicioderelajacionListNew = cita.getServicioderelajacionList();
             if (idClienteNew != null) {
                 idClienteNew = em.getReference(idClienteNew.getClass(), idClienteNew.getIdCliente());
                 cita.setIdCliente(idClienteNew);
             }
-            List<Detallecita> attachedDetallecitaListNew = new ArrayList<Detallecita>();
-            for (Detallecita detallecitaListNewDetallecitaToAttach : detallecitaListNew) {
-                detallecitaListNewDetallecitaToAttach = em.getReference(detallecitaListNewDetallecitaToAttach.getClass(), detallecitaListNewDetallecitaToAttach.getIdDetalleCita());
-                attachedDetallecitaListNew.add(detallecitaListNewDetallecitaToAttach);
+            List<Servicioderelajacion> attachedServicioderelajacionListNew = new ArrayList<Servicioderelajacion>();
+            for (Servicioderelajacion servicioderelajacionListNewServicioderelajacionToAttach : servicioderelajacionListNew) {
+                servicioderelajacionListNewServicioderelajacionToAttach = em.getReference(servicioderelajacionListNewServicioderelajacionToAttach.getClass(), servicioderelajacionListNewServicioderelajacionToAttach.getIdServicioDeRelajacion());
+                attachedServicioderelajacionListNew.add(servicioderelajacionListNewServicioderelajacionToAttach);
             }
-            detallecitaListNew = attachedDetallecitaListNew;
-            cita.setDetallecitaList(detallecitaListNew);
+            servicioderelajacionListNew = attachedServicioderelajacionListNew;
+            cita.setServicioderelajacionList(servicioderelajacionListNew);
             cita = em.merge(cita);
             if (idClienteOld != null && !idClienteOld.equals(idClienteNew)) {
                 idClienteOld.getCitaList().remove(cita);
@@ -125,22 +101,23 @@ public class CitaJpaController implements Serializable {
                 idClienteNew.getCitaList().add(cita);
                 idClienteNew = em.merge(idClienteNew);
             }
-            for (Detallecita detallecitaListNewDetallecita : detallecitaListNew) {
-                if (!detallecitaListOld.contains(detallecitaListNewDetallecita)) {
-                    Cita oldIdCitaOfDetallecitaListNewDetallecita = detallecitaListNewDetallecita.getIdCita();
-                    detallecitaListNewDetallecita.setIdCita(cita);
-                    detallecitaListNewDetallecita = em.merge(detallecitaListNewDetallecita);
-                    if (oldIdCitaOfDetallecitaListNewDetallecita != null && !oldIdCitaOfDetallecitaListNewDetallecita.equals(cita)) {
-                        oldIdCitaOfDetallecitaListNewDetallecita.getDetallecitaList().remove(detallecitaListNewDetallecita);
-                        oldIdCitaOfDetallecitaListNewDetallecita = em.merge(oldIdCitaOfDetallecitaListNewDetallecita);
-                    }
+            for (Servicioderelajacion servicioderelajacionListOldServicioderelajacion : servicioderelajacionListOld) {
+                if (!servicioderelajacionListNew.contains(servicioderelajacionListOldServicioderelajacion)) {
+                    servicioderelajacionListOldServicioderelajacion.getCitaList().remove(cita);
+                    servicioderelajacionListOldServicioderelajacion = em.merge(servicioderelajacionListOldServicioderelajacion);
+                }
+            }
+            for (Servicioderelajacion servicioderelajacionListNewServicioderelajacion : servicioderelajacionListNew) {
+                if (!servicioderelajacionListOld.contains(servicioderelajacionListNewServicioderelajacion)) {
+                    servicioderelajacionListNewServicioderelajacion.getCitaList().add(cita);
+                    servicioderelajacionListNewServicioderelajacion = em.merge(servicioderelajacionListNewServicioderelajacion);
                 }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = cita.getIdCita();
+                Integer id = cita.getIdCita();
                 if (findCita(id) == null) {
                     throw new NonexistentEntityException("The cita with id " + id + " no longer exists.");
                 }
@@ -153,7 +130,7 @@ public class CitaJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -165,21 +142,15 @@ public class CitaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cita with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<Detallecita> detallecitaListOrphanCheck = cita.getDetallecitaList();
-            for (Detallecita detallecitaListOrphanCheckDetallecita : detallecitaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Cita (" + cita + ") cannot be destroyed since the Detallecita " + detallecitaListOrphanCheckDetallecita + " in its detallecitaList field has a non-nullable idCita field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             Cliente idCliente = cita.getIdCliente();
             if (idCliente != null) {
                 idCliente.getCitaList().remove(cita);
                 idCliente = em.merge(idCliente);
+            }
+            List<Servicioderelajacion> servicioderelajacionList = cita.getServicioderelajacionList();
+            for (Servicioderelajacion servicioderelajacionListServicioderelajacion : servicioderelajacionList) {
+                servicioderelajacionListServicioderelajacion.getCitaList().remove(cita);
+                servicioderelajacionListServicioderelajacion = em.merge(servicioderelajacionListServicioderelajacion);
             }
             em.remove(cita);
             em.getTransaction().commit();
@@ -214,7 +185,7 @@ public class CitaJpaController implements Serializable {
         }
     }
 
-    public Cita findCita(String id) {
+    public Cita findCita(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Cita.class, id);

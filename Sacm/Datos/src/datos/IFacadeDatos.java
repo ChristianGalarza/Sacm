@@ -20,8 +20,8 @@ public interface IFacadeDatos {
     
     public void actualizarCita(Cita cita);
     
-    public void eliminarCita(String id);
+    public void eliminarCita(int id);
     
-    public Cita obtenerCita(String id);
+    public Cita obtenerCita(int id);
     
 }

@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,9 +42,10 @@ public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idCliente")
-    private String idCliente;
+    private Integer idCliente;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "apellido")
@@ -64,15 +67,15 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(String idCliente) {
+    public Cliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
-    public String getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 

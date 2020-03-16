@@ -36,12 +36,12 @@ public class FacadadeDatos implements IFacadeDatos{
     }
 
     @Override
-    public void eliminarCita(String id) {
+    public void eliminarCita(int id) {
         this.daoCita.eliminar(id);
     }
 
     @Override
-    public Cita obtenerCita(String id) {
+    public Cita obtenerCita(int id) {
         return daoCita.obtener(id);
     }
     

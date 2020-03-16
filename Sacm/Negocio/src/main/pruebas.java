@@ -25,8 +25,8 @@ public class pruebas {
         System.out.println("obtenerCitas");
         
         List<Cita> expResult = new ArrayList<>();
-        expResult.add(new Cita("c1"));
-        expResult.add(new Cita("c2"));
+        expResult.add(new Cita(1));
+        expResult.add(new Cita(2));
         List<Cita> result = instance.obtenerCitas();
         System.out.println("Yia");
         

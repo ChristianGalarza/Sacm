@@ -21,8 +21,8 @@ public abstract class DAOBase<T> {
     
     public abstract void actualizar(T t);
     
-    public abstract void eliminar (String id);
+    public abstract void eliminar (int id);
     
-    public abstract T obtener (String id);
+    public abstract T obtener (int id);
     
 }

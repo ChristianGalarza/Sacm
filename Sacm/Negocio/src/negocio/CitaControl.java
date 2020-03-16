@@ -35,11 +35,11 @@ public class CitaControl {
     }
 
     
-    public void eliminarCita(String id) {
+    public void eliminarCita(int id) {
         this.facadadeDatos.eliminarCita(id);
     }
 
-    public Cita obtenerCita(String id) {
+    public Cita obtenerCita(int id) {
         return this.facadadeDatos.obtenerCita(id);
     }
 }

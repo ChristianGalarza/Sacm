@@ -8,17 +8,18 @@ package dominio;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,9 +44,10 @@ public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idCita")
-    private String idCita;
+    private Integer idCita;
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -58,37 +60,27 @@ public class Cita implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costoTotal")
     private Float costoTotal;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCita")
-    private List<Detallecita> detallecitaList;
+    @JoinTable(name = "detallecita", joinColumns = {
+        @JoinColumn(name = "idCita", referencedColumnName = "idCita")}, inverseJoinColumns = {
+        @JoinColumn(name = "idServicioDeRelajacion", referencedColumnName = "idServicioDeRelajacion")})
+    @ManyToMany
+    private List<Servicioderelajacion> servicioderelajacionList;
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     @ManyToOne(optional = false)
     private Cliente idCliente;
 
     public Cita() {
-        
     }
 
-    public Cita(String idCita) {
+    public Cita(Integer idCita) {
         this.idCita = idCita;
     }
 
-    public Cita(String idCita, Date fecha, Date hora, Date duracion, Float costoTotal, List<Detallecita> detallecitaList, Cliente idCliente) {
-        this.idCita = idCita;
-        this.fecha = fecha;
-        this.hora = hora;
-        this.duracion = duracion;
-        this.costoTotal = costoTotal;
-        this.detallecitaList = detallecitaList;
-        this.idCliente = idCliente;
-    }
-    
-    
-
-    public String getIdCita() {
+    public Integer getIdCita() {
         return idCita;
     }
 
-    public void setIdCita(String idCita) {
+    public void setIdCita(Integer idCita) {
         this.idCita = idCita;
     }
 
@@ -125,12 +117,12 @@ public class Cita implements Serializable {
     }
 
     @XmlTransient
-    public List<Detallecita> getDetallecitaList() {
-        return detallecitaList;
+    public List<Servicioderelajacion> getServicioderelajacionList() {
+        return servicioderelajacionList;
     }
 
-    public void setDetallecitaList(List<Detallecita> detallecitaList) {
-        this.detallecitaList = detallecitaList;
+    public void setServicioderelajacionList(List<Servicioderelajacion> servicioderelajacionList) {
+        this.servicioderelajacionList = servicioderelajacionList;
     }
 
     public Cliente getIdCliente() {
@@ -143,34 +135,27 @@ public class Cita implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.idCita);
+        int hash = 0;
+        hash += (idCita != null ? idCita.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Cita)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cita other = (Cita) obj;
-        if (!Objects.equals(this.idCita, other.idCita)) {
+        Cita other = (Cita) object;
+        if ((this.idCita == null && other.idCita != null) || (this.idCita != null && !this.idCita.equals(other.idCita))) {
             return false;
         }
         return true;
     }
 
-    
-
     @Override
     public String toString() {
-        return this.idCita+" "+this.getIdCliente().getIdCliente();
+        return "dominio.Cita[ idCita=" + idCita + " ]";
     }
     
 }
