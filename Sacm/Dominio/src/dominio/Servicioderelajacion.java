@@ -9,13 +9,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,9 +40,10 @@ public class Servicioderelajacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idServicioDeRelajacion")
-    private String idServicioDeRelajacion;
+    private Integer idServicioDeRelajacion;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "duracion")
@@ -50,21 +52,21 @@ public class Servicioderelajacion implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costo")
     private Float costo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idServicioDeRelajacion")
-    private List<Detallecita> detallecitaList;
+    @ManyToMany(mappedBy = "servicioderelajacionList")
+    private List<Cita> citaList;
 
     public Servicioderelajacion() {
     }
 
-    public Servicioderelajacion(String idServicioDeRelajacion) {
+    public Servicioderelajacion(Integer idServicioDeRelajacion) {
         this.idServicioDeRelajacion = idServicioDeRelajacion;
     }
 
-    public String getIdServicioDeRelajacion() {
+    public Integer getIdServicioDeRelajacion() {
         return idServicioDeRelajacion;
     }
 
-    public void setIdServicioDeRelajacion(String idServicioDeRelajacion) {
+    public void setIdServicioDeRelajacion(Integer idServicioDeRelajacion) {
         this.idServicioDeRelajacion = idServicioDeRelajacion;
     }
 
@@ -93,12 +95,12 @@ public class Servicioderelajacion implements Serializable {
     }
 
     @XmlTransient
-    public List<Detallecita> getDetallecitaList() {
-        return detallecitaList;
+    public List<Cita> getCitaList() {
+        return citaList;
     }
 
-    public void setDetallecitaList(List<Detallecita> detallecitaList) {
-        this.detallecitaList = detallecitaList;
+    public void setCitaList(List<Cita> citaList) {
+        this.citaList = citaList;
     }
 
     @Override

@@ -37,12 +37,12 @@ public class FacadadeNegocio implements IFacadadeNegocio{
 
     
     @Override
-    public void eliminarCita(String id) {
+    public void eliminarCita(int id) {
         this.citaControl.eliminarCita(id);
     }
 
     @Override
-    public Cita obtenerCita(String id) {
+    public Cita obtenerCita(int id) {
         return this.citaControl.obtenerCita(id);
     }
     

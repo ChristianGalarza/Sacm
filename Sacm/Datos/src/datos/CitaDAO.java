@@ -5,13 +5,12 @@
  */
 package datos;
 
+import controlesJPA.CitaJpaController;
+import controlesJPA.exceptions.NonexistentEntityException;
 import dominio.Cita;
-import exceptions.IllegalOrphanException;
-import exceptions.NonexistentEntityException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jpaControles.CitaJpaController;
 
 /**
  *
@@ -51,18 +50,16 @@ public class CitaDAO extends DAOBase<Cita>{
     }
 
     @Override
-    public void eliminar(String id) {
+    public void eliminar(int id) {
         try {
             cjc.destroy(id);
-        } catch (IllegalOrphanException ex) {
-            Logger.getLogger(CitaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(CitaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public Cita obtener(String id) {
+    public Cita obtener(int id) {
         return cjc.findCita(id);
     }
     

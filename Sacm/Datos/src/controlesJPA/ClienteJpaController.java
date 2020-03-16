@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jpaControles;
+package controlesJPA;
 
-import exceptions.IllegalOrphanException;
-import exceptions.NonexistentEntityException;
-import exceptions.PreexistingEntityException;
+import controlesJPA.exceptions.IllegalOrphanException;
+import controlesJPA.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -19,7 +18,6 @@ import java.util.List;
 import dominio.Cita;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -27,8 +25,8 @@ import javax.persistence.Persistence;
  */
 public class ClienteJpaController implements Serializable {
 
-    public ClienteJpaController() {
-        this.emf = this.emf = Persistence.createEntityManagerFactory("DatosPU");
+    public ClienteJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -36,7 +34,7 @@ public class ClienteJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Cliente cliente) throws PreexistingEntityException, Exception {
+    public void create(Cliente cliente) {
         if (cliente.getClienteList() == null) {
             cliente.setClienteList(new ArrayList<Cliente>());
         }
@@ -88,11 +86,6 @@ public class ClienteJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findCliente(cliente.getIdCliente()) != null) {
-                throw new PreexistingEntityException("Cliente " + cliente + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -183,7 +176,7 @@ public class ClienteJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = cliente.getIdCliente();
+                Integer id = cliente.getIdCliente();
                 if (findCliente(id) == null) {
                     throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.");
                 }
@@ -196,7 +189,7 @@ public class ClienteJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -262,7 +255,7 @@ public class ClienteJpaController implements Serializable {
         }
     }
 
-    public Cliente findCliente(String id) {
+    public Cliente findCliente(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Cliente.class, id);
