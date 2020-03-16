@@ -23,10 +23,8 @@ DROP TABLE IF EXISTS `detallecita`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detallecita` (
-  `idDetalleCita` varchar(10) COLLATE utf8_bin NOT NULL,
-  `idCita` varchar(10) COLLATE utf8_bin NOT NULL,
-  `idServicioDeRelajacion` varchar(10) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`idDetalleCita`),
+  `idCita` int NOT NULL,
+  `idServicioDeRelajacion` int NOT NULL,
   KEY `fk_DetalleCita_Cita1_idx` (`idCita`),
   KEY `fk_DetalleCita_ServicioDeRelajacion1_idx` (`idServicioDeRelajacion`),
   CONSTRAINT `fk_DetalleCita_Cita1` FOREIGN KEY (`idCita`) REFERENCES `cita` (`idCita`),
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-11 21:58:06
+-- Dump completed on 2020-03-16 15:25:46

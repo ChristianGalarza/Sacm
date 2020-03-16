@@ -23,16 +23,16 @@ DROP TABLE IF EXISTS `cita`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cita` (
-  `idCita` varchar(10) COLLATE utf8_bin NOT NULL,
+  `idCita` int NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
   `hora` time DEFAULT NULL,
   `duracion` time DEFAULT NULL,
   `costoTotal` float DEFAULT NULL,
-  `idCliente` varchar(10) COLLATE utf8_bin NOT NULL,
+  `idCliente` int NOT NULL,
   PRIMARY KEY (`idCita`),
   KEY `fk_Cita_Cliente1_idx` (`idCliente`),
   CONSTRAINT `fk_Cita_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `cita` (
 
 LOCK TABLES `cita` WRITE;
 /*!40000 ALTER TABLE `cita` DISABLE KEYS */;
+INSERT INTO `cita` VALUES (1,'2020-03-06','08:30:00','01:00:00',5000,1);
 /*!40000 ALTER TABLE `cita` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-11 21:58:06
+-- Dump completed on 2020-03-16 15:25:46
