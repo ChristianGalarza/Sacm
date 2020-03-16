@@ -8,16 +8,17 @@ package dominio;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,18 +27,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Usuario
+ * @author pc
  */
 @Entity
 @Table(name = "cita")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cita.findAll", query = "SELECT c FROM Cita c")
-    , @NamedQuery(name = "Cita.findByIdCita", query = "SELECT c FROM Cita c WHERE c.idCita = :idCita")
-    , @NamedQuery(name = "Cita.findByFecha", query = "SELECT c FROM Cita c WHERE c.fecha = :fecha")
-    , @NamedQuery(name = "Cita.findByHora", query = "SELECT c FROM Cita c WHERE c.hora = :hora")
-    , @NamedQuery(name = "Cita.findByDuracion", query = "SELECT c FROM Cita c WHERE c.duracion = :duracion")
-    , @NamedQuery(name = "Cita.findByCostoTotal", query = "SELECT c FROM Cita c WHERE c.costoTotal = :costoTotal")})
+    @NamedQuery(name = "Cita.findAll", query = "SELECT c FROM Cita c"),
+    @NamedQuery(name = "Cita.findByIdCita", query = "SELECT c FROM Cita c WHERE c.idCita = :idCita"),
+    @NamedQuery(name = "Cita.findByFecha", query = "SELECT c FROM Cita c WHERE c.fecha = :fecha"),
+    @NamedQuery(name = "Cita.findByHora", query = "SELECT c FROM Cita c WHERE c.hora = :hora"),
+    @NamedQuery(name = "Cita.findByDuracion", query = "SELECT c FROM Cita c WHERE c.duracion = :duracion"),
+    @NamedQuery(name = "Cita.findByCostoTotal", query = "SELECT c FROM Cita c WHERE c.costoTotal = :costoTotal")})
 public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,21 +58,31 @@ public class Cita implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costoTotal")
     private Float costoTotal;
-    @JoinTable(name = "detallecita", joinColumns = {
-        @JoinColumn(name = "idCita", referencedColumnName = "idCita")}, inverseJoinColumns = {
-        @JoinColumn(name = "idServicioDeRelajacion", referencedColumnName = "idServicioDeRelajacion")})
-    @ManyToMany
-    private List<Servicioderelajacion> servicioderelajacionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCita")
+    private List<Detallecita> detallecitaList;
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     @ManyToOne(optional = false)
     private Cliente idCliente;
 
     public Cita() {
+        
     }
 
     public Cita(String idCita) {
         this.idCita = idCita;
     }
+
+    public Cita(String idCita, Date fecha, Date hora, Date duracion, Float costoTotal, List<Detallecita> detallecitaList, Cliente idCliente) {
+        this.idCita = idCita;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.duracion = duracion;
+        this.costoTotal = costoTotal;
+        this.detallecitaList = detallecitaList;
+        this.idCliente = idCliente;
+    }
+    
+    
 
     public String getIdCita() {
         return idCita;
@@ -114,12 +125,12 @@ public class Cita implements Serializable {
     }
 
     @XmlTransient
-    public List<Servicioderelajacion> getServicioderelajacionList() {
-        return servicioderelajacionList;
+    public List<Detallecita> getDetallecitaList() {
+        return detallecitaList;
     }
 
-    public void setServicioderelajacionList(List<Servicioderelajacion> servicioderelajacionList) {
-        this.servicioderelajacionList = servicioderelajacionList;
+    public void setDetallecitaList(List<Detallecita> detallecitaList) {
+        this.detallecitaList = detallecitaList;
     }
 
     public Cliente getIdCliente() {
@@ -132,27 +143,34 @@ public class Cita implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idCita != null ? idCita.hashCode() : 0);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.idCita);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cita)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Cita other = (Cita) object;
-        if ((this.idCita == null && other.idCita != null) || (this.idCita != null && !this.idCita.equals(other.idCita))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cita other = (Cita) obj;
+        if (!Objects.equals(this.idCita, other.idCita)) {
             return false;
         }
         return true;
     }
 
+    
+
     @Override
     public String toString() {
-        return "dominio.Cita[ idCita=" + idCita + " ]";
+        return this.idCita+" "+this.getIdCliente().getIdCliente();
     }
     
 }
