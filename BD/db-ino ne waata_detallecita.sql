@@ -1,7 +1,7 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: db-ino ne waata
--- ------------------------------------------------------
+-- -------------------------------------------------------
 -- Server version	8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
