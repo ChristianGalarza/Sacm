@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controlesJPA;
+package controlJPA;
 
-import controlesJPA.exceptions.IllegalOrphanException;
-import controlesJPA.exceptions.NonexistentEntityException;
+import controlJPA.exceptions.IllegalOrphanException;
+import controlJPA.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;

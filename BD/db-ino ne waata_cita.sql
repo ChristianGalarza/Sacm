@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `cita`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cita` (
   `idCita` int NOT NULL AUTO_INCREMENT,
+  `idCliente` int NOT NULL,
   `fecha` date DEFAULT NULL,
   `hora` time DEFAULT NULL,
   `duracion` time DEFAULT NULL,
   `costoTotal` float DEFAULT NULL,
-  `idCliente` int NOT NULL,
   PRIMARY KEY (`idCita`),
   KEY `fk_Cita_Cliente1_idx` (`idCliente`),
   CONSTRAINT `fk_Cita_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `cita` (
 
 LOCK TABLES `cita` WRITE;
 /*!40000 ALTER TABLE `cita` DISABLE KEYS */;
-INSERT INTO `cita` VALUES (1,'2020-03-06','08:30:00','01:00:00',5000,1);
+INSERT INTO `cita` VALUES (2,1,'2020-03-06','08:30:00','01:00:00',5000),(3,1,'2020-03-17','20:40:50','20:40:50',400),(4,1,'2020-03-17','20:48:17','01:00:00',400),(5,1,'2020-03-18','20:49:06','01:00:00',400);
 /*!40000 ALTER TABLE `cita` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-16 15:25:46
+-- Dump completed on 2020-03-18 12:09:40

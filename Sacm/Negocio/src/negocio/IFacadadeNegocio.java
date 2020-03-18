@@ -6,6 +6,9 @@
 package negocio;
 
 import dominio.Cita;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,4 +26,12 @@ public interface IFacadadeNegocio {
     public void eliminarCita(int id);
 
     public Cita obtenerCita(int id);
+    
+    public String formatearFecha(Date fecha);
+
+    public Calendar convertirDateToCalendar(Date date);
+
+    public String formatearHora(Date hora);
+    
+    public List<Cita> obtenerCitasPorFecha(Date fecha);
 }

@@ -1,4 +1,4 @@
-package controlesJPA.exceptions;
+package controlJPA.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

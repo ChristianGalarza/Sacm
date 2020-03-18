@@ -27,7 +27,7 @@ public class FacadadeNegocioTest {
         
         List<Cita> expResult = new ArrayList<>();
         expResult.add(new Cita(1));
-        expResult.add(new Cita(2));
+        //expResult.add(new Cita(2));
         List<Cita> result = instance.obtenerCitas();
         assertEquals(expResult, result);
     }

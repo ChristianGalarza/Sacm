@@ -6,6 +6,8 @@
 package dominio;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -61,7 +63,7 @@ public class Cita implements Serializable {
     @Column(name = "costoTotal")
     private Float costoTotal;
     @JoinTable(name = "detallecita", joinColumns = {
-        @JoinColumn(name = "idCita", referencedColumnName = "idCita")}, inverseJoinColumns = {
+        @JoinColumn(name = "cita_idCita", referencedColumnName = "idCita")}, inverseJoinColumns = {
         @JoinColumn(name = "idServicioDeRelajacion", referencedColumnName = "idServicioDeRelajacion")})
     @ManyToMany
     private List<Servicioderelajacion> servicioderelajacionList;
@@ -131,6 +133,17 @@ public class Cita implements Serializable {
 
     public void setIdCliente(Cliente idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public String getServicios() {
+        String servicios = "<html>";
+        for (int i = 0; i < this.servicioderelajacionList.size(); i++) {
+            servicios += this.servicioderelajacionList.get(i).toString();
+            if (i != this.servicioderelajacionList.size() - 1) {
+                servicios += "<br>";
+            }
+        }
+        return servicios+="</html>";
     }
 
     @Override

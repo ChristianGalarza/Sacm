@@ -5,12 +5,15 @@
  */
 package datos;
 
-import controlesJPA.CitaJpaController;
-import controlesJPA.exceptions.NonexistentEntityException;
+import controlJPA.CitaJpaController;
+import controlJPA.exceptions.NonexistentEntityException;
 import dominio.Cita;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -61,6 +64,14 @@ public class CitaDAO extends DAOBase<Cita>{
     @Override
     public Cita obtener(int id) {
         return cjc.findCita(id);
+    }
+    
+    public List<Cita> obtenerCitasPorFecha(Date fecha) {
+        EntityManager em = cjc.getEntityManager();
+        TypedQuery<Cita> consultaAlumnos = em.createNamedQuery("Cita.findByFecha", Cita.class);
+        consultaAlumnos.setParameter("fecha", fecha);
+        List<Cita> lista = consultaAlumnos.getResultList();
+        return lista;
     }
     
 }
