@@ -6,6 +6,7 @@
 package datos;
 
 import dominio.Cita;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,6 +44,11 @@ public class FacadadeDatos implements IFacadeDatos{
     @Override
     public Cita obtenerCita(int id) {
         return daoCita.obtener(id);
+    }
+
+    @Override
+    public List<Cita> obtenerCitasPorFecha(Date fecha) {
+        return ((CitaDAO)daoCita).obtenerCitasPorFecha(fecha);
     }
     
     

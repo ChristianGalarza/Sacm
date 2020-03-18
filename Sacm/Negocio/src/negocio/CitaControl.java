@@ -8,13 +8,14 @@ package negocio;
 import datos.FacadadeDatos;
 import datos.IFacadeDatos;
 import dominio.Cita;
+import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author pc
  */
-public class CitaControl {
+class CitaControl {
     
     private IFacadeDatos facadadeDatos;
 
@@ -41,5 +42,9 @@ public class CitaControl {
 
     public Cita obtenerCita(int id) {
         return this.facadadeDatos.obtenerCita(id);
+    }
+    
+    public List<Cita> obtenerCitasPorFecha(Date fecha) {
+        return this.facadadeDatos.obtenerCitasPorFecha(fecha);
     }
 }

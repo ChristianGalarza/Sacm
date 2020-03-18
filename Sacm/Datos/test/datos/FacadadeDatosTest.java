@@ -47,7 +47,7 @@ public class FacadadeDatosTest {
         //ServicioderelajacionJpaController servicioControl = new ServicioderelajacionJpaController();
         
         List<Servicioderelajacion> listaDeServicio = new ArrayList<>();
-        listaDeServicio.add(new Servicioderelajacion(2));
+//        listaDeServicio.add(new Servicioderelajacion(2));
         listaDeServicio.add(new Servicioderelajacion(1));
         //listaDeServicio.add(servicioControl.findServicioderelajacion("servicio2"));
         
@@ -58,16 +58,18 @@ public class FacadadeDatosTest {
         
         //Agregar Fecha a cita
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date d = sdf.parse("06/03/2020");
+        Date d = sdf.parse("18/03/2020");
         cita.setFecha(d);
         
         //Agregar Hora a cita
         Calendar c2 = Calendar.getInstance();
-        c2.set(HOUR_OF_DAY,8);
-        c2.set(MINUTE,30);
-        c2.set(SECOND,0);
-        c2.set(MILLISECOND,0);
+//        c2.set(HOUR_OF_DAY,8);
+//        c2.set(MINUTE,30);
+//        c2.set(SECOND,0);
+//        c2.set(MILLISECOND,0);
+//        c2.add(Calendar.DATE, 1);
         Date d2 = c2.getTime();
+        
         cita.setHora(d2);
         
         //Agregar Duracion a cita
@@ -80,12 +82,23 @@ public class FacadadeDatosTest {
         cita.setDuracion(d1);
         
         //Agregar Costo Cita
-        cita.setCostoTotal(5000.0f);
+        cita.setCostoTotal(400.0f);
         
+        //Agregar cliente
         cita.setIdCliente(new Cliente(1));
+        
+        //Agregra servicios
+        cita.setServicioderelajacionList(listaDeServicio);
         
         instance.agregarCita(cita);
         
+    }
+    
+    @Test
+    public void obtenerCitasPorFecha() {
+        List<Cita> lista = instance.obtenerCitasPorFecha(Calendar.getInstance().getTime());
+        
+        System.out.println(lista);
     }
 //
 //    /**

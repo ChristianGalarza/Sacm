@@ -1,4 +1,4 @@
-package controlesJPA.exceptions;
+package controlJPA.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

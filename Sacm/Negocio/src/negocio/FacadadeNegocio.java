@@ -6,6 +6,8 @@
 package negocio;
 
 import dominio.Cita;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,9 +17,11 @@ import java.util.List;
 public class FacadadeNegocio implements IFacadadeNegocio{
 
     private CitaControl citaControl;
+    private CalendarControl calendarControl;
 
     public FacadadeNegocio() {
         this.citaControl = new CitaControl();
+        this.calendarControl = new CalendarControl();
     }
 
     @Override
@@ -44,6 +48,26 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     @Override
     public Cita obtenerCita(int id) {
         return this.citaControl.obtenerCita(id);
+    }
+
+    @Override
+    public String formatearFecha(Date fecha) {
+        return this.calendarControl.formatearFecha(fecha);
+    }
+
+    @Override
+    public Calendar convertirDateToCalendar(Date date) {
+        return this.calendarControl.convertirDateToCalendar(date);
+    }
+
+    @Override
+    public String formatearHora(Date hora) {
+        return this.calendarControl.formatearHora(hora);
+    }
+
+    @Override
+    public List<Cita> obtenerCitasPorFecha(Date fecha) {
+        return this.citaControl.obtenerCitasPorFecha(fecha);
     }
     
     

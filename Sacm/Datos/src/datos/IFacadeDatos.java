@@ -6,6 +6,7 @@
 package datos;
 
 import dominio.Cita;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,5 +24,7 @@ public interface IFacadeDatos {
     public void eliminarCita(int id);
     
     public Cita obtenerCita(int id);
+    
+    public List<Cita> obtenerCitasPorFecha(Date fecha);
     
 }
