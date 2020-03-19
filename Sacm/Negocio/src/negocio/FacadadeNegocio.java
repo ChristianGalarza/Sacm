@@ -6,6 +6,7 @@
 package negocio;
 
 import dominio.Cita;
+import dominio.Servicioderelajacion;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,10 +19,12 @@ public class FacadadeNegocio implements IFacadadeNegocio{
 
     private CitaControl citaControl;
     private CalendarControl calendarControl;
+    private ServicioDeRelajacionControl serviciosControl;
 
     public FacadadeNegocio() {
         this.citaControl = new CitaControl();
         this.calendarControl = new CalendarControl();
+        this.serviciosControl = new ServicioDeRelajacionControl();
     }
 
     @Override
@@ -68,6 +71,36 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     @Override
     public List<Cita> obtenerCitasPorFecha(Date fecha) {
         return this.citaControl.obtenerCitasPorFecha(fecha);
+    }
+
+    @Override
+    public int obtenerHora(Date hora) {
+        return this.calendarControl.obtenerHora(hora);
+    }
+
+    @Override
+    public int obtenerMinutos(Date hora) {
+        return this.calendarControl.obtenerMinutos(hora);
+    }
+
+    @Override
+    public Float calcularCostoTotalCita(List<Servicioderelajacion> listaServicios) {
+        return this.citaControl.calcularCostoTotalCita(listaServicios);
+    }
+
+    @Override
+    public Calendar calcularDuracionCita(List<Servicioderelajacion> listaServicios) {
+        return this.calendarControl.calcularDuracionCita(listaServicios);
+    }
+
+    @Override
+    public Date convertirHoras(int hora, int minuto) {
+        return this.calendarControl.convertirHoras(hora, minuto);
+    }
+
+    @Override
+    public List<Servicioderelajacion> obtenerServiciosDeRelajacion() {
+        return this.serviciosControl.obtenerServiciosDeRelajacion();
     }
     
     

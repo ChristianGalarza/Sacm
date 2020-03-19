@@ -105,7 +105,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton5" pref="101" max="32767" attributes="0"/>
                       <Component id="jButton4" max="32767" attributes="0"/>
-                      <Component id="jButton3" max="32767" attributes="0"/>
+                      <Component id="jButton_AgregarCita" max="32767" attributes="0"/>
                       <Component id="jLabel2" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -130,7 +130,7 @@
                       <Component id="jButton1" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton_AgregarCita" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -166,10 +166,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="jButton_AgregarCita">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar Cita"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_AgregarCitaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>

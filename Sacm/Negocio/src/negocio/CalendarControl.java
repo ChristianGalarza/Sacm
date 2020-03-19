@@ -5,9 +5,11 @@
  */
 package negocio;
 
+import dominio.Servicioderelajacion;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -35,8 +37,40 @@ public class CalendarControl {
         return calendar;
 
     }
+    
+    public Date convertirHoras(int hora, int minuto){
+        Calendar c2 = Calendar.getInstance();
+        c2.set(Calendar.HOUR_OF_DAY,hora);
+        c2.set(Calendar.MINUTE,minuto);
+        c2.set(Calendar.SECOND,0);
+        c2.set(Calendar.MILLISECOND,0);
+        return c2.getTime();
+    }
 
     public String formatearHora(Date hora) {
         return new SimpleDateFormat("HH:mm:SS").format(hora);
+    }
+    
+    public int obtenerHora(Date hora){
+        Calendar calendar = this.convertirDateToCalendar(hora);
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+    
+    public int obtenerMinutos(Date hora){
+        Calendar calendar = this.convertirDateToCalendar(hora);
+        return calendar.get(Calendar.MINUTE);
+    }
+    
+    public Calendar calcularDuracionCita(List<Servicioderelajacion> listaServicios) {
+        Calendar calendarAuxiliar = Calendar.getInstance();
+        calendarAuxiliar.set(Calendar.HOUR_OF_DAY, 0);
+        calendarAuxiliar.set(Calendar.MINUTE, 0);
+        calendarAuxiliar.set(Calendar.SECOND, 0);
+        calendarAuxiliar.set(Calendar.MILLISECOND, 0);
+        for (Servicioderelajacion servicioderelajacion : listaServicios) {
+            calendarAuxiliar.add(Calendar.HOUR_OF_DAY, obtenerHora(servicioderelajacion.getDuracion()));
+            calendarAuxiliar.add(Calendar.MINUTE, obtenerMinutos(servicioderelajacion.getDuracion()));
+        }
+        return calendarAuxiliar;
     }
 }

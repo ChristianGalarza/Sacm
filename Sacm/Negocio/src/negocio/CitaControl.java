@@ -8,6 +8,7 @@ package negocio;
 import datos.FacadadeDatos;
 import datos.IFacadeDatos;
 import dominio.Cita;
+import dominio.Servicioderelajacion;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +35,6 @@ class CitaControl {
     public void actualizarCita(Cita cita) {
         this.facadadeDatos.actualizarCita(cita);
     }
-
     
     public void eliminarCita(int id) {
         this.facadadeDatos.eliminarCita(id);
@@ -46,5 +46,13 @@ class CitaControl {
     
     public List<Cita> obtenerCitasPorFecha(Date fecha) {
         return this.facadadeDatos.obtenerCitasPorFecha(fecha);
+    }
+    
+    public Float calcularCostoTotalCita(List<Servicioderelajacion> listaServicios) {
+        float sumaCosto = 0;
+        for (Servicioderelajacion servicioderelajacion : listaServicios) {
+            sumaCosto += servicioderelajacion.getCosto();
+        }
+        return sumaCosto;
     }
 }
