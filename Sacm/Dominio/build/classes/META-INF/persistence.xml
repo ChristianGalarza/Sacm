@@ -2,12 +2,20 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="DominioPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+<<<<<<< HEAD
     <class>dominio.Cita</class>
     <class>dominio.Cliente</class>
     <class>dominio.Detallecita</class>
     <class>dominio.Servicioderelajacion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/db-ino ne waata?useLegacyDatetimeCode=false&amp;serverTimezone=America/Hermosillo"/>
+=======
+    <class>dominio.Cliente</class>
+    <class>dominio.Cita</class>
+    <class>dominio.Servicioderelajacion</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db-ino ne waata?useLegacyDatetimeCode=false&amp;serverTimezone=America/Mazatlan"/>
+>>>>>>> cambron
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="12345"/>

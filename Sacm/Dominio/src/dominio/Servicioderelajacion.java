@@ -125,7 +125,7 @@ public class Servicioderelajacion implements Serializable {
 
     @Override
     public String toString() {
-        return this.idServicioDeRelajacion + " " + this.getNombre();
+        return this.getNombre();
     }
     
 }

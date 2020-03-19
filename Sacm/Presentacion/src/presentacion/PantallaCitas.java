@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import negocio.IFacadadeNegocio;
+import constantes.Constantes;
 
 /**
  *
@@ -75,7 +76,7 @@ public class PantallaCitas extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton_AgregarCita = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
@@ -112,7 +113,12 @@ public class PantallaCitas extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setText("Agregar Cita");
+        jButton_AgregarCita.setText("Agregar Cita");
+        jButton_AgregarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AgregarCitaActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Eliminar Cita");
 
@@ -128,7 +134,7 @@ public class PantallaCitas extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_AgregarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,7 +154,7 @@ public class PantallaCitas extends javax.swing.JDialog {
                     .addComponent(jButton2)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
-                .addComponent(jButton3)
+                .addComponent(jButton_AgregarCita)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
@@ -191,6 +197,14 @@ public class PantallaCitas extends javax.swing.JDialog {
         this.jLabel1.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
         this.cargarCitas();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton_AgregarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarCitaActionPerformed
+        PantallaCita pantallaCita = PantallaCita.getInstancia(null, true, this.facadadeNegocio);
+        pantallaCita.actualizarPantalla(Constantes.AGREGAR, null);
+        this.setVisible(false);
+        pantallaCita.mostrarPantalla();
+        this.setVisible(true);
+    }//GEN-LAST:event_jButton_AgregarCitaActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -237,9 +251,9 @@ public class PantallaCitas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton_AgregarCita;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

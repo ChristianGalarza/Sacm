@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -24,8 +25,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class ServicioderelajacionJpaController implements Serializable {
 
-    public ServicioderelajacionJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public ServicioderelajacionJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("DatosPU");
     }
     private EntityManagerFactory emf = null;
 

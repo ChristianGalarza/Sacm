@@ -25,18 +25,18 @@ import org.junit.Test;
 public class FacadadeDatosTest {
     
     IFacadeDatos instance = new FacadadeDatos();
-//    /**
-//     * Test of obtenerCitas method, of class FacadadeDatos.
-//     */
-//    @Test
-//    public void testObtenerCitas() {
-//        System.out.println("obtenerCitas");
-//        List<Cita> expResult = new ArrayList<>();
-//        expResult.add(new Cita(1));
-//        expResult.add(new Cita(2));
-//        List<Cita> result = instance.obtenerCitas();
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Test of obtenerCitas method, of class FacadadeDatos.
+     */
+    @Test
+    public void testObtenerCitas() {
+        System.out.println("obtenerCitas");
+        List<Cita> expResult = new ArrayList<>();
+        expResult.add(new Cita(1));
+        expResult.add(new Cita(2));
+        List<Cita> result = instance.obtenerCitas();
+        assertEquals(expResult, result);
+    }
 
     /**
      * Test of agregarCita method, of class FacadadeDatos.
@@ -99,6 +99,15 @@ public class FacadadeDatosTest {
         List<Cita> lista = instance.obtenerCitasPorFecha(Calendar.getInstance().getTime());
         
         System.out.println(lista);
+    }
+    
+    @Test
+    public void obtenerServicios() {
+        List<Servicioderelajacion> lista = instance.obtenerServicioderelajacion();
+        for (Servicioderelajacion servicioderelajacion : lista) {
+            System.out.println(servicioderelajacion.toString());
+            
+        }
     }
 //
 //    /**
