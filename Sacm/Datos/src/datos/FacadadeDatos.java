@@ -17,7 +17,7 @@ import java.util.List;
 public class FacadadeDatos implements IFacadeDatos{
     
     private DAOBase<Cita> daoCita;
-    private ServicioDeRelajacionDAO daoServicioDeRelajacion;
+    private DAOBase<Servicioderelajacion> daoServicioDeRelajacion;
 
     public FacadadeDatos() {
         this.daoCita = new CitaDAO();
