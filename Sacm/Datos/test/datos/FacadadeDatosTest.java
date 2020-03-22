@@ -24,7 +24,7 @@ import org.junit.Test;
  */
 public class FacadadeDatosTest {
     
-    IFacadeDatos instance = new FacadadeDatos();
+    IFacadadeDatos instance = new FacadadeDatos();
     /**
      * Test of obtenerCitas method, of class FacadadeDatos.
      */
@@ -107,6 +107,14 @@ public class FacadadeDatosTest {
         for (Servicioderelajacion servicioderelajacion : lista) {
             System.out.println(servicioderelajacion.toString());
             
+        }
+    }
+    
+    @Test
+    public void obtenerClientes(){
+        List<Cliente> lista = instance.obtenerClientes();
+        for (Cliente cliente : lista) {
+            System.out.println(cliente.getNombre());
         }
     }
 //

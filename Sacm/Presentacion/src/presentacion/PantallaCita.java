@@ -17,12 +17,18 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import negocio.IFacadadeNegocio;
+import com.mxrck.autocompleter.*;
+import javafx.scene.paint.Color;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 /**
  *
  * @author pc
  */
-public class PantallaCita extends javax.swing.JDialog {
+public class PantallaCita extends javax.swing.JDialog{
 
     private static PantallaCita pantallaCita;
     private Cita cita;
@@ -33,6 +39,8 @@ public class PantallaCita extends javax.swing.JDialog {
     private List<Servicioderelajacion> listaDeServicioDerelajacionDisponibles;
     private List<Servicioderelajacion> listaDeServicioDerelajacionResumen;
     private DefaultComboBoxModel<Servicioderelajacion> dcm;
+    private TextAutoCompleter textAutoCompleter;
+    private Autocompletar autocompletar;
     
     /**
      * Creates new form PantallaCita
@@ -40,12 +48,14 @@ public class PantallaCita extends javax.swing.JDialog {
     private PantallaCita(java.awt.Frame parent, boolean modal, IFacadadeNegocio facadadeNegocio) {
         super(parent, modal);
         this.facadadeNegocio = facadadeNegocio;
-        //Servicioderelajacion[] s = new Servicioderelajacion[this.facadadeNegocio.obtenerServiciosDeRelajacion().size()];
-        
         this.dcm = new DefaultComboBoxModel<>();
         initComponents();
-        this.listaDeServicioDerelajacionResumen = new ArrayList<>();
         
+        this.autocompletar = new Autocompletar(this.jTextField_Id);
+        this.listaDeServicioDerelajacionResumen = new ArrayList<>();
+        this.textAutoCompleter = new TextAutoCompleter(jTextField_Nombre,this.autocompletar);
+        this.textAutoCompleter.setMode(0);
+        this.setLocationRelativeTo(null);
     }
     
     public static PantallaCita getInstancia(java.awt.Frame parent, boolean modal,IFacadadeNegocio facadadeNegocio) {
@@ -54,62 +64,62 @@ public class PantallaCita extends javax.swing.JDialog {
         }
         return pantallaCita;
     }
-    
-    public void setOperacion(int operacion) {
-        this.operacion = operacion;
-    }
-
-    public Cita getCita() {
-        return cita;
-    }
-
-    public void setCita(Cita cita) {
-        this.cita = cita;
-    }
-
-    public int getOperacion() {
-        return operacion;
-    }
 
     public void actualizarPantalla(int operacion, Cita cita) {
         this.operacion = operacion;
         this.cita = cita;
-        
         if(operacion == Constantes.AGREGAR) {
             this.jLabel_Titulo.setText("Agregar Cita");
             this.jButton_GuardarCita.setText("Guardar Cita");
-        } else if (operacion == Constantes.ACTUALIZAR) {
+        } else if (operacion == Constantes.MODIFICAR) {
             this.jLabel_Titulo.setText("Actualizar Cita");
             this.jButton_GuardarCita.setText("Actualizar Cita");
+            this.jTextField_Id.setText(cita.getIdCliente().getIdCliente()+"");
         } else if (operacion == Constantes.ELIMINAR) {
             this.jLabel_Titulo.setText("Eliminar Cita");
             this.jButton_GuardarCita.setText("Eliminar Cita");
-            this.jPanel_DatosCita.setEnabled(false);
-            this.jPanel_ResumenCita.setEnabled(false);
+            this.setEditableComponentes(false);
         }
         
-        if (operacion == Constantes.ACTUALIZAR || operacion == Constantes.ELIMINAR) {
-            
-            this.jTextField_Nombre.setText(cita.getIdCliente().getNombre() + " " +cita.getIdCliente().getNombre());
+        if (operacion == Constantes.MODIFICAR || operacion == Constantes.ELIMINAR) {
+            this.jTextField_Nombre.setText(cita.getIdCliente().getNombre() + " " +cita.getIdCliente().getApellido());
             this.listaDeServicioDerelajacionResumen = this.cita.getServicioderelajacionList();
             this.jDateChooser_FechaCita.setDate(cita.getFecha());
             this.jSpinner_HoraCita.setValue(facadadeNegocio.obtenerHora(cita.getHora()));
             this.jSpinner_MinutosCita.setValue(facadadeNegocio.obtenerMinutos(cita.getHora()));
+            this.calcularTiempoDeCita();
+            this.calculcularCostoTotal();
         }
         
-        if(operacion == Constantes.ACTUALIZAR || operacion == Constantes.AGREGAR) {
-            this.jPanel_DatosCita.setEnabled(true);
-            this.jPanel_ResumenCita.setEnabled(true);
+        if(operacion == Constantes.MODIFICAR || operacion == Constantes.AGREGAR) {
+            this.setEditableComponentes(true);
             this.cargarServicios();
+            this.cargarClientes();
         }
         this.cargarResumen();
+    }
+    
+    public void setEditableComponentes(boolean bln){
+        this.jTextField_Nombre.setEditable(bln);
+        this.jComboBox_Servicios.setEditable(bln);
+        this.jButton_AgregarServicio.setEnabled(bln);
+        this.jDateChooser_FechaCita.setEnabled(bln);
+        this.jSpinner_HoraCita.setEnabled(bln);
+        this.jSpinner_MinutosCita.setEnabled(bln);
+        this.jTable_ResumenCita.setEnabled(bln);
+        this.jButton_EliminarServicio.setEnabled(bln);
+    }
+    
+    public void cargarClientes() {
         
+        this.textAutoCompleter.addItems(this.facadadeNegocio.obtenerClientes().toArray());
     }
     
     public void cargarServicios() {
         Servicioderelajacion[] s = new Servicioderelajacion[this.facadadeNegocio.obtenerServiciosDeRelajacion().size()];
         this.dcm = new DefaultComboBoxModel<>(this.facadadeNegocio.obtenerServiciosDeRelajacion().toArray(s));
         this.jComboBox_Servicios.setModel(dcm);
+        this.jComboBox_Servicios.setEditable(false);
     }
     
     public void cargarResumen() {
@@ -127,11 +137,13 @@ public class PantallaCita extends javax.swing.JDialog {
     }
     
     public void cerrarPantalla() {
-        this.limpiarPantalla();
-        this.setVisible(true);
+        this.setVisible(false);
+        
     }
     
     public void limpiarPantalla() {
+        this.jTextField_Id.setText("0");
+        this.textAutoCompleter.removeAllItems();        
         this.jTextField_Nombre.setText("");
         this.jDateChooser_FechaCita.setCalendar(Calendar.getInstance());
         this.jSpinner_HoraCita.setValue(0);
@@ -139,10 +151,21 @@ public class PantallaCita extends javax.swing.JDialog {
         this.listaDeServicioDerelajacionResumen.clear();
     }
     
-    public void mostrarPantalla() {
+    public void mostrarPantalla(int operacion, Cita cita) {
+        this.limpiarPantalla();
+        this.actualizarPantalla(operacion, cita);
         this.setVisible(true);
     }
     
+    public void calculcularCostoTotal(){
+        this.costoTotal = this.facadadeNegocio.calcularCostoTotalCita(this.listaDeServicioDerelajacionResumen);
+        this.jLabel_CostoTotal.setText(costoTotal+"");
+    }
+    
+    public void calcularTiempoDeCita() {
+        this.duracion = this.facadadeNegocio.calcularDuracionCita(this.listaDeServicioDerelajacionResumen).getTime();
+        this.jLabel_TiempoDeCita.setText(this.facadadeNegocio.formatearHora(this.duracion));
+    }
     
 
     /**
@@ -167,11 +190,15 @@ public class PantallaCita extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jSpinner_HoraCita = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_Id = new javax.swing.JTextField();
         jPanel_ResumenCita = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_ResumenCita = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jTable_ResumenCita = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        jButton_EliminarServicio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel_CostoTotal = new javax.swing.JLabel();
@@ -193,6 +220,12 @@ public class PantallaCita extends javax.swing.JDialog {
             }
         });
 
+        jTextField_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_NombreKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Nombre:");
 
         jLabel3.setText("Servicio:");
@@ -207,8 +240,7 @@ public class PantallaCita extends javax.swing.JDialog {
 
         jLabel7.setText("Id:");
 
-        jTextField1.setText("1");
-        jTextField1.setEnabled(false);
+        jTextField_Id.setEnabled(false);
 
         javax.swing.GroupLayout jPanel_DatosCitaLayout = new javax.swing.GroupLayout(jPanel_DatosCita);
         jPanel_DatosCita.setLayout(jPanel_DatosCitaLayout);
@@ -230,7 +262,7 @@ public class PantallaCita extends javax.swing.JDialog {
                         .addComponent(jSpinner_MinutosCita, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_DatosCitaLayout.createSequentialGroup()
                         .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField_Id, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField_Nombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox_Servicios, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jDateChooser_FechaCita, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
@@ -244,7 +276,7 @@ public class PantallaCita extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,7 +311,12 @@ public class PantallaCita extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable_ResumenCita);
 
-        jButton1.setText("Eliminar Servicio");
+        jButton_EliminarServicio.setText("Eliminar Servicio");
+        jButton_EliminarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EliminarServicioActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Costo Total:");
 
@@ -293,7 +330,7 @@ public class PantallaCita extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel_ResumenCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton_EliminarServicio))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_ResumenCitaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -312,7 +349,7 @@ public class PantallaCita extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButton_EliminarServicio)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel_ResumenCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -325,6 +362,11 @@ public class PantallaCita extends javax.swing.JDialog {
         );
 
         jButton_Cancelar.setText("Cancelar");
+        jButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CancelarActionPerformed(evt);
+            }
+        });
 
         jButton_GuardarCita.setText("Guardar Cita");
         jButton_GuardarCita.addActionListener(new java.awt.event.ActionListener() {
@@ -377,28 +419,134 @@ public class PantallaCita extends javax.swing.JDialog {
     private void jButton_AgregarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarServicioActionPerformed
         this.listaDeServicioDerelajacionResumen.add((Servicioderelajacion)this.jComboBox_Servicios.getSelectedItem());
         this.cargarResumen();
-        this.costoTotal = this.facadadeNegocio.calcularCostoTotalCita(listaDeServicioDerelajacionResumen);
-        this.duracion = this.facadadeNegocio.calcularDuracionCita(listaDeServicioDerelajacionResumen).getTime();
-        this.jLabel_TiempoDeCita.setText(this.facadadeNegocio.formatearHora(this.duracion));
-        this.jLabel_CostoTotal.setText(costoTotal+"");
+        this.calcularTiempoDeCita();
+        this.calculcularCostoTotal();
     }//GEN-LAST:event_jButton_AgregarServicioActionPerformed
 
     private void jButton_GuardarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarCitaActionPerformed
-        this.cita = new Cita(0);
-        this.cita.setIdCliente(new Cliente(1));
-        this.cita.setCostoTotal(Float.parseFloat(this.jLabel_CostoTotal.getText()));
-        this.cita.setDuracion(duracion);
-        this.cita.setFecha(this.jDateChooser_FechaCita.getDate());
-        this.cita.setHora(this.facadadeNegocio.convertirHoras((int)this.jSpinner_HoraCita.getValue(),(int)this.jSpinner_MinutosCita.getValue()));
-        this.cita.setServicioderelajacionList(listaDeServicioDerelajacionResumen);
-        this.facadadeNegocio.agregarCita(cita);
+        //VALIDAR CAMPOS
+        
+        if(operacion == Constantes.AGREGAR) {
+            if (this.validarCampos()) {
+                if (this.mostrarMensajeDeConfirmacion("¿Desea guardar la cita?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    this.cita = new Cita(0);
+                    this.cita.setIdCliente(new Cliente(Integer.parseInt(this.jTextField_Id.getText())));
+                    this.cita.setCostoTotal(Float.parseFloat(this.jLabel_CostoTotal.getText()));
+                    this.cita.setDuracion(duracion);
+                    this.cita.setFecha(this.jDateChooser_FechaCita.getDate());
+                    this.cita.setHora(this.facadadeNegocio.convertirHoras((int) this.jSpinner_HoraCita.getValue(), (int) this.jSpinner_MinutosCita.getValue()));
+                    this.cita.setServicioderelajacionList(listaDeServicioDerelajacionResumen);
+                    this.facadadeNegocio.agregarCita(cita);
+                    this.mostrarMensajeDeAdvertencia("Cita guardada correctamente", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                return;
+            }
+            
+        } else if (operacion == Constantes.MODIFICAR) {
+            if (this.validarCampos()) {
+                if (this.mostrarMensajeDeConfirmacion("¿Desea actualizar la cita?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    this.cita.setIdCliente(new Cliente(Integer.parseInt(this.jTextField_Id.getText())));
+                    this.cita.setCostoTotal(Float.parseFloat(this.jLabel_CostoTotal.getText()));
+                    this.cita.setDuracion(duracion);
+                    this.cita.setFecha(this.jDateChooser_FechaCita.getDate());
+                    this.cita.setHora(this.facadadeNegocio.convertirHoras((int) this.jSpinner_HoraCita.getValue(), (int) this.jSpinner_MinutosCita.getValue()));
+                    this.cita.setServicioderelajacionList(listaDeServicioDerelajacionResumen);
+                    this.facadadeNegocio.actualizarCita(this.cita);
+                    this.mostrarMensajeDeAdvertencia("Cita actualizada correctamente", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                return;
+            }
+            
+        } else if (this.operacion == Constantes.ELIMINAR) {
+            if(this.mostrarMensajeDeConfirmacion("¿Desea eliminar la cita?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                this.facadadeNegocio.eliminarCita(this.cita.getIdCita());
+                this.mostrarMensajeDeAdvertencia("Cita eliminada correctamente",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        
+        this.cerrarPantalla();
     }//GEN-LAST:event_jButton_GuardarCitaActionPerformed
 
+    private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
+        this.cerrarPantalla();
+    }//GEN-LAST:event_jButton_CancelarActionPerformed
+
+    private void jTextField_NombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_NombreKeyPressed
+        this.jTextField_Id.setText("0");
+    }//GEN-LAST:event_jTextField_NombreKeyPressed
+
+    private void jButton_EliminarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EliminarServicioActionPerformed
+        int fila = this.jTable_ResumenCita.getSelectedRow();
+        if (fila != -1) {
+            this.listaDeServicioDerelajacionResumen.remove(fila);
+            this.cargarResumen();
+        } else {
+            this.mostrarMensajeDeAdvertencia("Seleccione un servicio", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButton_EliminarServicioActionPerformed
+
+    public int mostrarMensajeDeConfirmacion(String mensaje,int tipoDeMensaje) {
+        return JOptionPane.showConfirmDialog(this, mensaje, "Mensaje", tipoDeMensaje);
+    }
+    
+    public void mostrarMensajeDeAdvertencia(String mensaje, int tipoDeMensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Mensaje", tipoDeMensaje);
+    }
+    
+    public boolean validarCampos() {
+        if(this.jTextField_Id.getText().equals("0")) {
+            mostrarMensajeDeAdvertencia("El cliente ingresado no se encuentra registrado", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        boolean contieneCita = this.facadadeNegocio.obtenerClientes().contains((Cliente)this.textAutoCompleter.getItemSelected());
+        if(!contieneCita) {
+            mostrarMensajeDeAdvertencia("El cliente ingresado no se encuentra registrado", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(this.listaDeServicioDerelajacionResumen.isEmpty()){
+            mostrarMensajeDeAdvertencia("No se ha ingresado al menos un servicio de relajación", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        JTextField x = (JTextField)this.jDateChooser_FechaCita.getComponent(1);
+        
+        if(x.getForeground().getRed() == 255) {
+            mostrarMensajeDeAdvertencia("Seleccione una fecha del calendario", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        try{
+            int hora = (Integer)(this.jSpinner_HoraCita.getValue());
+            if(hora > 13 || hora < 0) {
+                mostrarMensajeDeAdvertencia("Seleccione una hora correcta de la cita", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException nfe) {
+            mostrarMensajeDeAdvertencia("Seleccione una hora correcta de la cita", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        try{
+            int minuto = (Integer)(this.jSpinner_MinutosCita.getValue());
+            if(minuto > 59 || minuto < 0) {
+                mostrarMensajeDeAdvertencia("Seleccione una hora correcta de la cita", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException nfe) {
+            mostrarMensajeDeAdvertencia("Seleccione un minuto correcto de la cita", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        return true;
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_AgregarServicio;
     private javax.swing.JButton jButton_Cancelar;
+    private javax.swing.JButton jButton_EliminarServicio;
     private javax.swing.JButton jButton_GuardarCita;
     private javax.swing.JComboBox<Servicioderelajacion> jComboBox_Servicios;
     private com.toedter.calendar.JDateChooser jDateChooser_FechaCita;
@@ -418,7 +566,29 @@ public class PantallaCita extends javax.swing.JDialog {
     private javax.swing.JSpinner jSpinner_HoraCita;
     private javax.swing.JSpinner jSpinner_MinutosCita;
     private javax.swing.JTable jTable_ResumenCita;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField_Id;
     private javax.swing.JTextField jTextField_Nombre;
     // End of variables declaration//GEN-END:variables
+
+private class Autocompletar implements AutoCompleterCallback {
+
+        private JTextField id;
+        
+        public Autocompletar(JTextField id) {
+            this.id = id;
+        }
+
+        @Override
+        public void callback(Object o) {
+            this.id.setText(((Cliente)o).getIdCliente()+"");
+        }
+
+        public JTextField getId() {
+            return id;
+        }
+
+        public void setId(JTextField id) {
+            this.id = id;
+        }
+    }
 }

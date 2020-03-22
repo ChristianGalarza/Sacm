@@ -6,11 +6,11 @@
 package negocio;
 
 import datos.FacadadeDatos;
-import datos.IFacadeDatos;
 import dominio.Cita;
 import dominio.Servicioderelajacion;
 import java.util.Date;
 import java.util.List;
+import datos.IFacadadeDatos;
 
 /**
  *
@@ -18,7 +18,7 @@ import java.util.List;
  */
 class CitaControl {
     
-    private IFacadeDatos facadadeDatos;
+    private IFacadadeDatos facadadeDatos;
 
     public CitaControl() {
         this.facadadeDatos = new FacadadeDatos();

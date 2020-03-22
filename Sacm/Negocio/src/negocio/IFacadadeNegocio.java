@@ -6,6 +6,7 @@
 package negocio;
 
 import dominio.Cita;
+import dominio.Cliente;
 import dominio.Servicioderelajacion;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,4 +48,6 @@ public interface IFacadadeNegocio {
      public Date convertirHoras(int hora, int minuto);
      
      public List<Servicioderelajacion> obtenerServiciosDeRelajacion();
+     
+     public List<Cliente> obtenerClientes();
 }

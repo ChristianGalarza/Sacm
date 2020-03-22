@@ -11,13 +11,14 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import negocio.IFacadadeNegocio;
 import constantes.Constantes;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author pc
  */
 public class PantallaCitas extends javax.swing.JDialog {
-
+    private int ESPACIO_ENTRE_LINEAS = 40;
     private IFacadadeNegocio facadadeNegocio;
     private List<Cita> listaDeCitas;
     private Calendar fechaActual;
@@ -31,10 +32,9 @@ public class PantallaCitas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.facadadeNegocio = facadadeNegocio;
-        //----------------------------------------------------------------------------------------------
         this.fechaActual = Calendar.getInstance();
-        this.jLabel1.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
-        this.listaDeCitas = this.facadadeNegocio.obtenerCitas();
+        this.jLabel_Fecha.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
+        this.setLocationRelativeTo(null);
     }
     
     public void cargarCitas() {
@@ -55,9 +55,15 @@ public class PantallaCitas extends javax.swing.JDialog {
                 saltosdeLinea =cita[i][3].split("<br>").length;
             }
         }
+        jTable_Citas.setRowHeight(saltosdeLinea*this.ESPACIO_ENTRE_LINEAS);
         
-        jTable_Citas.setRowHeight(saltosdeLinea*40);
         this.jTable_Citas.setModel(new DefaultTableModel(cita, nombreColumnas));
+    }
+    
+    public void cambiarFecha(int movimiento) {
+        this.fechaActual.add(Calendar.DATE, movimiento);
+        this.jLabel_Fecha.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
+        this.cargarCitas();
     }
 
     /**
@@ -70,15 +76,19 @@ public class PantallaCitas extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable_Citas = new javax.swing.JTable();
+        jTable_Citas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_Fecha = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton_AgregarCita = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButton_ModificarCita = new javax.swing.JButton();
+        jButton_EliminarCita = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,6 +104,8 @@ public class PantallaCitas extends javax.swing.JDialog {
             }
         ));
         jScrollPane2.setViewportView(jTable_Citas);
+
+        jLabel_Fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Fecha");
@@ -120,34 +132,44 @@ public class PantallaCitas extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setText("Eliminar Cita");
+        jButton_ModificarCita.setText("Modificar Cita");
+        jButton_ModificarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ModificarCitaActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Modificar Cita");
+        jButton_EliminarCita.setText("Eliminar Cita");
+        jButton_EliminarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EliminarCitaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_EliminarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_ModificarCita, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                     .addComponent(jButton_AgregarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -156,9 +178,9 @@ public class PantallaCitas extends javax.swing.JDialog {
                 .addGap(38, 38, 38)
                 .addComponent(jButton_AgregarCita)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(jButton_ModificarCita)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(jButton_EliminarCita)
                 .addContainerGap())
         );
 
@@ -168,9 +190,9 @@ public class PantallaCitas extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -178,8 +200,8 @@ public class PantallaCitas extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -187,75 +209,55 @@ public class PantallaCitas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.fechaActual.add(Calendar.DATE, 1);
-        this.jLabel1.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
-        this.cargarCitas();
+        this.cambiarFecha(1);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.fechaActual.add(Calendar.DATE, -1);
-        this.jLabel1.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
-        this.cargarCitas();
+        this.cambiarFecha(-1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_AgregarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarCitaActionPerformed
-        PantallaCita pantallaCita = PantallaCita.getInstancia(null, true, this.facadadeNegocio);
-        pantallaCita.actualizarPantalla(Constantes.AGREGAR, null);
-        this.setVisible(false);
-        pantallaCita.mostrarPantalla();
-        this.setVisible(true);
+        this.mostrarPantallaCita(Constantes.AGREGAR, null);
     }//GEN-LAST:event_jButton_AgregarCitaActionPerformed
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(PantallaCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(PantallaCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(PantallaCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(PantallaCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                PantallaCitas dialog = new PantallaCitas(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
+    private void jButton_ModificarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ModificarCitaActionPerformed
+        this.mostrarPantallaCita(Constantes.MODIFICAR, null);
+    }//GEN-LAST:event_jButton_ModificarCitaActionPerformed
+
+    private void jButton_EliminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EliminarCitaActionPerformed
+        this.mostrarPantallaCita(Constantes.ELIMINAR, null);
+    }//GEN-LAST:event_jButton_EliminarCitaActionPerformed
+
+    public void mostrarPantallaCita(int tipoDeOperacion, Cita cita) {
+        PantallaCita pantallaCita = PantallaCita.getInstancia(null, true, this.facadadeNegocio);
+        this.setVisible(false);
+        if(tipoDeOperacion == Constantes.AGREGAR) {
+            pantallaCita.mostrarPantalla(tipoDeOperacion, cita);
+        } else {
+            int fila = this.jTable_Citas.getSelectedRow();
+            if (fila != -1) {
+                Cita citaSeleccion = this.listaDeCitas.get(fila);
+                pantallaCita.mostrarPantalla(tipoDeOperacion, citaSeleccion);
+            } else {
+                this.mostrarAdvertencia("Seleccione una cita", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        this.cargarCitas();
+        this.setVisible(true);
+    }
+    
+    public void mostrarAdvertencia(String mensaje, int tipoDeMensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Mensaje", tipoDeMensaje);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton_AgregarCita;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton_EliminarCita;
+    private javax.swing.JButton jButton_ModificarCita;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel_Fecha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_Citas;

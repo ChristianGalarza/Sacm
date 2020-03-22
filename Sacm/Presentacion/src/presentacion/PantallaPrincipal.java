@@ -22,6 +22,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     public PantallaPrincipal() {
         initComponents();
         facadadeNegocio = new FacadadeNegocio();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -71,6 +72,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         PantallaCitas pc = new PantallaCitas(this, false, facadadeNegocio);
         pc.cargarCitas();
         pc.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem_CitasActionPerformed
 
 //    /**

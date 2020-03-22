@@ -6,6 +6,7 @@
 package datos;
 
 import dominio.Cita;
+import dominio.Cliente;
 import dominio.Servicioderelajacion;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author pc
  */
-public interface IFacadeDatos {
+public interface IFacadadeDatos {
     
     public List<Cita> obtenerCitas();
     
@@ -29,5 +30,7 @@ public interface IFacadeDatos {
     public List<Cita> obtenerCitasPorFecha(Date fecha);
     
     public List<Servicioderelajacion> obtenerServicioderelajacion();
+    
+    public List<Cliente> obtenerClientes();
     
 }
