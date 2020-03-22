@@ -13,7 +13,7 @@ public class Constantes {
     
     public static int AGREGAR = 0;
     public static int ELIMINAR = 1;
-    public static int ACTUALIZAR = 2;
+    public static int MODIFICAR = 2;
     public static int DESPLEGAR = 3;
     
 }

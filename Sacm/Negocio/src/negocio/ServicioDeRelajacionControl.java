@@ -5,16 +5,16 @@
  */
 package negocio;
 import datos.FacadadeDatos;
-import datos.IFacadeDatos;
 import dominio.Servicioderelajacion;
 import java.util.List;
+import datos.IFacadadeDatos;
 /**
  *
  * @author pc
  */
 public class ServicioDeRelajacionControl {
     
-    private IFacadeDatos facadadeDatos;
+    private IFacadadeDatos facadadeDatos;
 
     public ServicioDeRelajacionControl() {
         this.facadadeDatos = new FacadadeDatos();

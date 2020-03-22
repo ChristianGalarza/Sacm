@@ -6,6 +6,7 @@
 package negocio;
 
 import dominio.Cita;
+import dominio.Cliente;
 import dominio.Servicioderelajacion;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,11 +21,13 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     private CitaControl citaControl;
     private CalendarControl calendarControl;
     private ServicioDeRelajacionControl serviciosControl;
+    private ClienteControl clienteControl;
 
     public FacadadeNegocio() {
         this.citaControl = new CitaControl();
         this.calendarControl = new CalendarControl();
         this.serviciosControl = new ServicioDeRelajacionControl();
+        this.clienteControl = new ClienteControl();
     }
 
     @Override
@@ -101,6 +104,11 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     @Override
     public List<Servicioderelajacion> obtenerServiciosDeRelajacion() {
         return this.serviciosControl.obtenerServiciosDeRelajacion();
+    }
+
+    @Override
+    public List<Cliente> obtenerClientes() {
+        return this.clienteControl.obtenerClientes();
     }
     
     

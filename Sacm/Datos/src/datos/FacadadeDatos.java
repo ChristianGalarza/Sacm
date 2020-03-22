@@ -6,6 +6,7 @@
 package datos;
 
 import dominio.Cita;
+import dominio.Cliente;
 import dominio.Servicioderelajacion;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +15,16 @@ import java.util.List;
  *
  * @author pc
  */
-public class FacadadeDatos implements IFacadeDatos{
+public class FacadadeDatos implements IFacadadeDatos{
     
     private DAOBase<Cita> daoCita;
-    private ServicioDeRelajacionDAO daoServicioDeRelajacion;
+    private DAOBase<Servicioderelajacion> daoServicioDeRelajacion;
+    private DAOBase<Cliente> daoCliente;
 
     public FacadadeDatos() {
         this.daoCita = new CitaDAO();
         this.daoServicioDeRelajacion = new ServicioDeRelajacionDAO();
+        this.daoCliente = new ClienteDAO();
     }
 
     @Override
@@ -57,6 +60,11 @@ public class FacadadeDatos implements IFacadeDatos{
     @Override
     public List<Servicioderelajacion> obtenerServicioderelajacion() {
         return this.daoServicioDeRelajacion.obtenerTodos();
+    }
+
+    @Override
+    public List<Cliente> obtenerClientes() {
+        return this.daoCliente.obtenerTodos();
     }
     
     
