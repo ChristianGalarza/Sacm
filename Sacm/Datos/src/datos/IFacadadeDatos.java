@@ -33,4 +33,6 @@ public interface IFacadadeDatos {
     
     public List<Cliente> obtenerClientes();
     
+    public List<Cita> generarQuery(String query);
+    
 }

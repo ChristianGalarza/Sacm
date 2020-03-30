@@ -8,10 +8,11 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-03-22T12:18:43")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-03-29T20:57:33")
 @StaticMetamodel(Cita.class)
 public class Cita_ { 
 
+    public static volatile SingularAttribute<Cita, Date> horaFin;
     public static volatile SingularAttribute<Cita, Integer> idCita;
     public static volatile SingularAttribute<Cita, Date> fecha;
     public static volatile SingularAttribute<Cita, Cliente> idCliente;

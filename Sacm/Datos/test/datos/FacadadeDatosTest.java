@@ -117,6 +117,22 @@ public class FacadadeDatosTest {
             System.out.println(cliente.getNombre());
         }
     }
+    
+    @Test
+    public void generarQuery() {
+        String query = "SELECT c\n"
+                + "FROM Cita c\n"
+                + "where c.fecha = \"2020-03-29\" \n"
+                + "and (((c.hora > \"07:30:00\" and c.hora < \"12:30:00\") \n"
+                + "or (c.horaFin > \"07:30:00\" and c.hora < \"12:30:00\")) \n"
+                + "or (\"07:30:00\" > c.hora and c.hora < c.horaFin) \n"
+                + "or (\"12:30:00\" > c.hora and c.hora < c.horaFin))";
+
+//        String query = "SELECT c FROM Cita c";
+        List<Cita> lista = instance.generarQuery(query);
+
+        System.out.println(lista.get(0).getIdCita());
+    }
 //
 //    /**
 //     * Test of actualizarCita method, of class FacadadeDatos.

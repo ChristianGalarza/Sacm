@@ -66,6 +66,11 @@ public class FacadadeDatos implements IFacadadeDatos{
     public List<Cliente> obtenerClientes() {
         return this.daoCliente.obtenerTodos();
     }
+
+    @Override
+    public List<Cita> generarQuery(String query) {
+        return ((CitaDAO)daoCita).generarQuery(query);
+    }
     
     
     

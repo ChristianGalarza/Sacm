@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -68,10 +69,15 @@ public class CitaDAO extends DAOBase<Cita>{
     
     public List<Cita> obtenerCitasPorFecha(Date fecha) {
         EntityManager em = cjc.getEntityManager();
-        TypedQuery<Cita> consultaAlumnos = em.createNamedQuery("Cita.findByFecha", Cita.class);
-        consultaAlumnos.setParameter("fecha", fecha);
-        List<Cita> lista = consultaAlumnos.getResultList();
+        TypedQuery<Cita> consultaCita = em.createNamedQuery("Cita.findByFecha", Cita.class);
+        consultaCita.setParameter("fecha", fecha);
+        List<Cita> lista = consultaCita.getResultList();
         return lista;
     }
     
+    public List<Cita> generarQuery(String query) {
+        EntityManager em = cjc.getEntityManager();
+        Query queryGenerado = em.createQuery(query);
+        return (List<Cita>)queryGenerado.getResultList();
+    }
 }

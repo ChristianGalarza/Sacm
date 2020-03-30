@@ -50,4 +50,8 @@ public interface IFacadadeNegocio {
      public List<Servicioderelajacion> obtenerServiciosDeRelajacion();
      
      public List<Cliente> obtenerClientes();
+     
+     public Date sumarHora(Date horaInicio, Date duracion);
+     
+     public List<Cita> verificarCitasEmpalmadas(Cita cita);
 }

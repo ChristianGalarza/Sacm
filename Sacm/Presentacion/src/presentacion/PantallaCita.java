@@ -426,7 +426,7 @@ public class PantallaCita extends javax.swing.JDialog{
     private void jButton_GuardarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarCitaActionPerformed
         //VALIDAR CAMPOS
         
-        if(operacion == Constantes.AGREGAR) {
+        if (operacion == Constantes.AGREGAR) {
             if (this.validarCampos()) {
                 if (this.mostrarMensajeDeConfirmacion("¿Desea guardar la cita?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     this.cita = new Cita(0);
@@ -436,13 +436,21 @@ public class PantallaCita extends javax.swing.JDialog{
                     this.cita.setFecha(this.jDateChooser_FechaCita.getDate());
                     this.cita.setHora(this.facadadeNegocio.convertirHoras((int) this.jSpinner_HoraCita.getValue(), (int) this.jSpinner_MinutosCita.getValue()));
                     this.cita.setServicioderelajacionList(listaDeServicioDerelajacionResumen);
-                    this.facadadeNegocio.agregarCita(cita);
-                    this.mostrarMensajeDeAdvertencia("Cita guardada correctamente", JOptionPane.INFORMATION_MESSAGE);
+                    this.cita.setHoraFin(this.facadadeNegocio.sumarHora(this.cita.getHora(), this.cita.getDuracion()));
+                    if (this.facadadeNegocio.verificarCitasEmpalmadas(cita).isEmpty()) {
+                        this.facadadeNegocio.agregarCita(cita);
+                        this.mostrarMensajeDeAdvertencia("Cita guardada correctamente", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        this.mostrarMensajeDeAdvertencia("La cita se empalma", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
                 }
+
             } else {
                 return;
             }
-            
+
         } else if (operacion == Constantes.MODIFICAR) {
             if (this.validarCampos()) {
                 if (this.mostrarMensajeDeConfirmacion("¿Desea actualizar la cita?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -452,13 +460,21 @@ public class PantallaCita extends javax.swing.JDialog{
                     this.cita.setFecha(this.jDateChooser_FechaCita.getDate());
                     this.cita.setHora(this.facadadeNegocio.convertirHoras((int) this.jSpinner_HoraCita.getValue(), (int) this.jSpinner_MinutosCita.getValue()));
                     this.cita.setServicioderelajacionList(listaDeServicioDerelajacionResumen);
-                    this.facadadeNegocio.actualizarCita(this.cita);
-                    this.mostrarMensajeDeAdvertencia("Cita actualizada correctamente", JOptionPane.INFORMATION_MESSAGE);
+                    this.cita.setHoraFin(this.facadadeNegocio.sumarHora(this.cita.getHora(), this.cita.getDuracion()));
+                    if (this.facadadeNegocio.verificarCitasEmpalmadas(cita).isEmpty()) {
+                        this.facadadeNegocio.actualizarCita(this.cita);
+                        this.mostrarMensajeDeAdvertencia("Cita actualizada correctamente", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        this.mostrarMensajeDeAdvertencia("La cita se empalma", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
                 }
+
             } else {
                 return;
             }
-            
+
         } else if (this.operacion == Constantes.ELIMINAR) {
             if(this.mostrarMensajeDeConfirmacion("¿Desea eliminar la cita?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 this.facadadeNegocio.eliminarCita(this.cita.getIdCita());
