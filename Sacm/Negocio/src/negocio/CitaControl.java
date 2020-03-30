@@ -55,4 +55,8 @@ class CitaControl {
         }
         return sumaCosto;
     }
+    
+    public List<Cita> generarQuery(String query) {
+        return this.facadadeDatos.generarQuery(query);
+    }
 }
