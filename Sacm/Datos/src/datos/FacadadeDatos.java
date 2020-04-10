@@ -71,6 +71,26 @@ public class FacadadeDatos implements IFacadadeDatos{
     public List<Cita> generarQuery(String query) {
         return ((CitaDAO)daoCita).generarQuery(query);
     }
+
+    @Override
+    public void agregarCliente(Cliente t) {
+        this.daoCliente.agregar(t);
+    }
+
+    @Override
+    public void actualizarCliente(Cliente t) {
+        this.daoCliente.actualizar(t);
+    }
+
+    @Override
+    public void eliminarCliente(int id) {
+        this.daoCliente.eliminar(id);
+    }
+
+    @Override
+    public Cliente obtenerCliente(int id) {
+        return this.daoCliente.obtener(id);
+    }
     
     
     
