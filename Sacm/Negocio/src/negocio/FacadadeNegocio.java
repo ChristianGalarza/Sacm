@@ -134,6 +134,26 @@ public class FacadadeNegocio implements IFacadadeNegocio{
         return this.citaControl.generarQuery(query);
     }
 
+    @Override
+    public void agregarCliente(Cliente t) {
+        this.clienteControl.agregarCliente(t);
+    }
+
+    @Override
+    public void actualizarCliente(Cliente t) {
+        this.clienteControl.actualizarCliente(t);
+    }
+
+    @Override
+    public void eliminarCliente(int id) {
+        this.clienteControl.eliminarCliente(id);
+    }
+
+    @Override
+    public Cliente obtenerCliente(int id) {
+        return this.clienteControl.obtenerCliente(id);
+    }
+
     
     
     

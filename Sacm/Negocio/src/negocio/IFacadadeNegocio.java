@@ -54,4 +54,12 @@ public interface IFacadadeNegocio {
      public Date sumarHora(Date horaInicio, Date duracion);
      
      public List<Cita> verificarCitasEmpalmadas(Cita cita);
+     
+     public void agregarCliente(Cliente t);
+
+    public void actualizarCliente(Cliente t);
+
+    public void eliminarCliente(int id);
+
+    public Cliente obtenerCliente(int id);
 }

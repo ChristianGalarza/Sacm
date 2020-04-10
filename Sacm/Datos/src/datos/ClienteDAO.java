@@ -6,8 +6,12 @@
 package datos;
 
 import controlJPA.ClienteJpaController;
+import controlJPA.exceptions.IllegalOrphanException;
+import controlJPA.exceptions.NonexistentEntityException;
 import dominio.Cliente;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,22 +32,34 @@ public class ClienteDAO extends DAOBase<Cliente>{
 
     @Override
     public void agregar(Cliente t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.clienteJPA.create(t);
     }
 
     @Override
     public void actualizar(Cliente t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            this.clienteJPA.edit(t);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            this.clienteJPA.destroy(id);
+        } catch (IllegalOrphanException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public Cliente obtener(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.clienteJPA.findCliente(id);
     }
     
 }

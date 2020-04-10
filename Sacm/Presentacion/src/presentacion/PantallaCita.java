@@ -535,7 +535,7 @@ public class PantallaCita extends javax.swing.JDialog{
         }
         try{
             int hora = (Integer)(this.jSpinner_HoraCita.getValue());
-            if(hora > 13 || hora < 0) {
+            if(hora > 23 || hora < 0) {
                 mostrarMensajeDeAdvertencia("Seleccione una hora correcta de la cita", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
