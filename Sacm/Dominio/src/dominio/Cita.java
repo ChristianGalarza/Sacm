@@ -6,8 +6,6 @@
 package dominio;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -43,6 +41,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cita.findByDuracion", query = "SELECT c FROM Cita c WHERE c.duracion = :duracion"),
     @NamedQuery(name = "Cita.findByCostoTotal", query = "SELECT c FROM Cita c WHERE c.costoTotal = :costoTotal")})
 public class Cita implements Serializable {
+
+    @Column(name = "horaFin")
+    @Temporal(TemporalType.TIME)
+    private Date horaFin;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -169,6 +171,14 @@ public class Cita implements Serializable {
     @Override
     public String toString() {
         return "dominio.Cita[ idCita=" + idCita + " ]";
+    }
+
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
     }
     
 }

@@ -33,7 +33,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`idCliente`),
   KEY `fk_cliente_cliente1_idx` (`idClienteRecomendador`),
   CONSTRAINT `fk_cliente_cliente1` FOREIGN KEY (`idClienteRecomendador`) REFERENCES `cliente` (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Jesus','Cambron',21,'jcambron@gmail.com','6441186425',NULL),(2,'Christian','Galarza',20,'christian@gmail.com','6441154875',1);
+INSERT INTO `cliente` VALUES (3,'Jesus','Cambron',21,'jcambron@gmail.com','6441186425',NULL),(6,'Christian','Galarza',20,'christian@gmail.com','6441154875',3);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-18 12:09:40
+-- Dump completed on 2020-03-29 21:16:51

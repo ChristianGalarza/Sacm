@@ -5,16 +5,21 @@
  */
 package datos;
 
+import controlJPA.exceptions.IllegalOrphanException;
+import controlJPA.exceptions.NonexistentEntityException;
 import dominio.Cita;
+import dominio.Cliente;
 import dominio.Servicioderelajacion;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author pc
  */
-public interface IFacadeDatos {
+public interface IFacadadeDatos {
     
     public List<Cita> obtenerCitas();
     
@@ -29,5 +34,17 @@ public interface IFacadeDatos {
     public List<Cita> obtenerCitasPorFecha(Date fecha);
     
     public List<Servicioderelajacion> obtenerServicioderelajacion();
+    
+    public List<Cliente> obtenerClientes();
+    
+    public List<Cita> generarQuery(String query);
+    
+    public void agregarCliente(Cliente t);
+
+    public void actualizarCliente(Cliente t);
+
+    public void eliminarCliente(int id);
+
+    public Cliente obtenerCliente(int id);
     
 }

@@ -51,6 +51,11 @@ public class CalendarControl {
         return new SimpleDateFormat("HH:mm:SS").format(hora);
     }
     
+    public String formatearfecha(Date fecha) {
+        Calendar calendar = this.convertirDateToCalendar(fecha);
+        return calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.DAY_OF_MONTH)+"-"+(calendar.get(Calendar.DAY_OF_WEEK) - 1);
+    }
+    
     public int obtenerHora(Date hora){
         Calendar calendar = this.convertirDateToCalendar(hora);
         return calendar.get(Calendar.HOUR_OF_DAY);
@@ -72,5 +77,13 @@ public class CalendarControl {
             calendarAuxiliar.add(Calendar.MINUTE, obtenerMinutos(servicioderelajacion.getDuracion()));
         }
         return calendarAuxiliar;
+    }
+    
+    public Date sumarHora(Date horaInicio, Date duracion) {
+        Calendar h1 = this.convertirDateToCalendar(horaInicio);
+        Calendar h2 = this.convertirDateToCalendar(duracion);
+        h1.add(Calendar.HOUR_OF_DAY, h2.get(Calendar.HOUR_OF_DAY));
+        h1.add(Calendar.MINUTE, h2.get(Calendar.MINUTE));
+        return h1.getTime();
     }
 }

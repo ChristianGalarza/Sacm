@@ -6,7 +6,9 @@
 package negocio;
 
 import dominio.Cita;
+import dominio.Cliente;
 import dominio.Servicioderelajacion;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,11 +22,13 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     private CitaControl citaControl;
     private CalendarControl calendarControl;
     private ServicioDeRelajacionControl serviciosControl;
+    private ClienteControl clienteControl;
 
     public FacadadeNegocio() {
         this.citaControl = new CitaControl();
         this.calendarControl = new CalendarControl();
         this.serviciosControl = new ServicioDeRelajacionControl();
+        this.clienteControl = new ClienteControl();
     }
 
     @Override
@@ -102,6 +106,55 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     public List<Servicioderelajacion> obtenerServiciosDeRelajacion() {
         return this.serviciosControl.obtenerServiciosDeRelajacion();
     }
+
+    @Override
+    public List<Cliente> obtenerClientes() {
+        return this.clienteControl.obtenerClientes();
+    }
+
+    @Override
+    public Date sumarHora(Date horaInicio, Date duracion) {
+        return this.calendarControl.sumarHora(horaInicio, duracion);
+    }
+
+    @Override
+    public List<Cita> verificarCitasEmpalmadas(Cita cita) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(cita.getFecha());
+        String fecha = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH));
+        String horaInicio = new SimpleDateFormat("HH:mm:SS").format(cita.getHora());
+        String horaFin = new SimpleDateFormat("HH:mm:SS").format(cita.getHoraFin());
+        String query = "SELECT c\n"
+                + "FROM Cita c\n"
+                + "where c.fecha = \""+fecha+"\" \n"
+                + "and (((c.hora > \""+horaInicio+"\" and c.hora < \""+horaFin+"\") \n"
+                + "or (c.horaFin > \""+horaInicio+"\" and c.hora < \""+horaFin+"\")) \n"
+                + "or (\""+horaInicio+"\" > c.hora and c.hora < c.horaFin) \n"
+                + "or (\""+horaFin+"\" > c.hora and c.hora < c.horaFin))";
+        return this.citaControl.generarQuery(query);
+    }
+
+    @Override
+    public void agregarCliente(Cliente t) {
+        this.clienteControl.agregarCliente(t);
+    }
+
+    @Override
+    public void actualizarCliente(Cliente t) {
+        this.clienteControl.actualizarCliente(t);
+    }
+
+    @Override
+    public void eliminarCliente(int id) {
+        this.clienteControl.eliminarCliente(id);
+    }
+
+    @Override
+    public Cliente obtenerCliente(int id) {
+        return this.clienteControl.obtenerCliente(id);
+    }
+
+    
     
     
 }

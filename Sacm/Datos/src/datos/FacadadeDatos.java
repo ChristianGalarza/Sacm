@@ -6,6 +6,7 @@
 package datos;
 
 import dominio.Cita;
+import dominio.Cliente;
 import dominio.Servicioderelajacion;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +15,16 @@ import java.util.List;
  *
  * @author pc
  */
-public class FacadadeDatos implements IFacadeDatos{
+public class FacadadeDatos implements IFacadadeDatos{
     
     private DAOBase<Cita> daoCita;
-    private ServicioDeRelajacionDAO daoServicioDeRelajacion;
+    private DAOBase<Servicioderelajacion> daoServicioDeRelajacion;
+    private DAOBase<Cliente> daoCliente;
 
     public FacadadeDatos() {
         this.daoCita = new CitaDAO();
         this.daoServicioDeRelajacion = new ServicioDeRelajacionDAO();
+        this.daoCliente = new ClienteDAO();
     }
 
     @Override
@@ -57,6 +60,36 @@ public class FacadadeDatos implements IFacadeDatos{
     @Override
     public List<Servicioderelajacion> obtenerServicioderelajacion() {
         return this.daoServicioDeRelajacion.obtenerTodos();
+    }
+
+    @Override
+    public List<Cliente> obtenerClientes() {
+        return this.daoCliente.obtenerTodos();
+    }
+
+    @Override
+    public List<Cita> generarQuery(String query) {
+        return ((CitaDAO)daoCita).generarQuery(query);
+    }
+
+    @Override
+    public void agregarCliente(Cliente t) {
+        this.daoCliente.agregar(t);
+    }
+
+    @Override
+    public void actualizarCliente(Cliente t) {
+        this.daoCliente.actualizar(t);
+    }
+
+    @Override
+    public void eliminarCliente(int id) {
+        this.daoCliente.eliminar(id);
+    }
+
+    @Override
+    public Cliente obtenerCliente(int id) {
+        return this.daoCliente.obtener(id);
     }
     
     
