@@ -91,6 +91,26 @@ public class FacadadeDatos implements IFacadadeDatos{
     public Cliente obtenerCliente(int id) {
         return this.daoCliente.obtener(id);
     }
+
+    @Override
+    public void agregarServicioderelajacion(Servicioderelajacion t) {
+        this.daoServicioDeRelajacion.agregar(t);
+    }
+
+    @Override
+    public void actualizarServicioderelajacion(Servicioderelajacion t) {
+        this.daoServicioDeRelajacion.actualizar(t);
+    }
+
+    @Override
+    public void eliminarServicioderelajacion(int id) {
+        this.daoServicioDeRelajacion.eliminar(id);
+    }
+
+    @Override
+    public Servicioderelajacion obtenerServicioderelajacion(int id) {
+        return this.daoServicioDeRelajacion.obtener(id);
+    }
     
     
     

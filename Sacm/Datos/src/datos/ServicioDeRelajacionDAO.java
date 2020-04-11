@@ -6,8 +6,11 @@
 package datos;
 
 import controlJPA.ServicioderelajacionJpaController;
+import controlJPA.exceptions.NonexistentEntityException;
 import java.util.List;
 import dominio.Servicioderelajacion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author pc
@@ -27,22 +30,30 @@ public class ServicioDeRelajacionDAO extends DAOBase<Servicioderelajacion>{
 
     @Override
     public void agregar(Servicioderelajacion t) {
-        
+        this.serviciosJPA.create(t);
     }
 
     @Override
     public void actualizar(Servicioderelajacion t) {
-        
+        try {
+            this.serviciosJPA.edit(t);
+        } catch (Exception ex) {
+            Logger.getLogger(ServicioDeRelajacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void eliminar(int id) {
-        
+        try {
+            this.serviciosJPA.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ServicioDeRelajacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public Servicioderelajacion obtener(int id) {
-        return null;
+        return this.serviciosJPA.findServicioderelajacion(id);
     }
 
     

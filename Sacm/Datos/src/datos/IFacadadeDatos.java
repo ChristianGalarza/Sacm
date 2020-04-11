@@ -47,4 +47,12 @@ public interface IFacadadeDatos {
 
     public Cliente obtenerCliente(int id);
     
+    public void agregarServicioderelajacion(Servicioderelajacion t);
+
+    public void actualizarServicioderelajacion(Servicioderelajacion t);
+
+    public void eliminarServicioderelajacion(int id);
+
+    public Servicioderelajacion obtenerServicioderelajacion(int id);
+    
 }

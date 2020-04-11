@@ -24,6 +24,21 @@ public class ServicioDeRelajacionControl {
         return this.facadadeDatos.obtenerServicioderelajacion();
     }
     
+    public void agregarServicioDeRelajacion(Servicioderelajacion t) {
+        this.facadadeDatos.agregarServicioderelajacion(t);
+    }
+
+    public void actualizarServicioDeRelajacion(Servicioderelajacion t) {
+        this.facadadeDatos.actualizarServicioderelajacion(t);
+    }
+
+    public void eliminarServicioDeRelajacion(int id) {
+        this.facadadeDatos.eliminarServicioderelajacion(id);
+    }
+
+    public Servicioderelajacion obtenerServicioDeRelajacion(int id) {
+        return this.facadadeDatos.obtenerServicioderelajacion(id);
+    }
     
     
 }
