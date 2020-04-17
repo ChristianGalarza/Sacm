@@ -111,7 +111,6 @@ public class PantallaCita extends javax.swing.JDialog{
     }
     
     public void cargarClientes() {
-        
         this.textAutoCompleter.addItems(this.facadadeNegocio.obtenerClientes().toArray());
     }
     
