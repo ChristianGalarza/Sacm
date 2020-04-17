@@ -97,7 +97,11 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
+<<<<<<< HEAD
                               <Component id="jTextField_Id" alignment="0" max="32767" attributes="0"/>
+=======
+                              <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+>>>>>>> Christian
                               <Component id="jTextField_Nombre" alignment="0" max="32767" attributes="0"/>
                               <Component id="jComboBox_Servicios" alignment="0" max="32767" attributes="0"/>
                               <Component id="jDateChooser_FechaCita" alignment="0" pref="141" max="32767" attributes="0"/>
@@ -116,7 +120,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                       <Component id="jTextField_Id" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> Christian
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -162,6 +170,7 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField_Nombre">
+<<<<<<< HEAD
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField_NombreKeyPressed"/>
           </Events>
@@ -170,6 +179,8 @@
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="PantallaCita_jTextField_Nombre"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
           </AuxValues>
+=======
+>>>>>>> Christian
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -216,8 +227,14 @@
             <Property name="text" type="java.lang.String" value="Id:"/>
           </Properties>
         </Component>
+<<<<<<< HEAD
         <Component class="javax.swing.JTextField" name="jTextField_Id">
           <Properties>
+=======
+        <Component class="javax.swing.JTextField" name="jTextField1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="1"/>
+>>>>>>> Christian
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
@@ -232,7 +249,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                       <Component id="jButton_EliminarServicio" alignment="0" min="-2" max="-2" attributes="0"/>
+=======
+                      <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+>>>>>>> Christian
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -257,7 +278,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="jButton_EliminarServicio" min="-2" max="-2" attributes="0"/>
+=======
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+>>>>>>> Christian
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -292,6 +317,7 @@
                   </Table>
                 </Property>
               </Properties>
+<<<<<<< HEAD
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex){&#xa;        return false;&#xa;    }&#xa;}"/>
               </AuxValues>
@@ -305,6 +331,15 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_EliminarServicioActionPerformed"/>
           </Events>
+=======
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar Servicio"/>
+          </Properties>
+>>>>>>> Christian
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
