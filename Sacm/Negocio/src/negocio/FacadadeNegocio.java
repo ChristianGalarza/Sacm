@@ -152,9 +152,5 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     @Override
     public Cliente obtenerCliente(int id) {
         return this.clienteControl.obtenerCliente(id);
-    }
-
-    
-    
-    
+    }    
 }

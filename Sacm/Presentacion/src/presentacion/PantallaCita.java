@@ -111,7 +111,6 @@ public class PantallaCita extends javax.swing.JDialog{
     }
     
     public void cargarClientes() {
-        
         this.textAutoCompleter.addItems(this.facadadeNegocio.obtenerClientes().toArray());
     }
     
@@ -465,6 +464,13 @@ public class PantallaCita extends javax.swing.JDialog{
                         this.facadadeNegocio.actualizarCita(this.cita);
                         this.mostrarMensajeDeAdvertencia("Cita actualizada correctamente", JOptionPane.INFORMATION_MESSAGE);
                     } else {
+                        for (Cita citasEmpalmadasLista : this.facadadeNegocio.verificarCitasEmpalmadas(cita)) {
+                            if (citasEmpalmadasLista.equals(cita)) {
+                                this.facadadeNegocio.actualizarCita(this.cita);
+                                this.mostrarMensajeDeAdvertencia("Cita actualizada correctamente", JOptionPane.INFORMATION_MESSAGE);
+                                return;
+                            }
+                        }
                         this.mostrarMensajeDeAdvertencia("La cita se empalma", JOptionPane.INFORMATION_MESSAGE);
                         return;
                     }

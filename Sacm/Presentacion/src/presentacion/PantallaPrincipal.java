@@ -36,11 +36,20 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu_Administracion = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem_Citas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu_Administracion.setText("Administración");
+
+        jMenuItem1.setText("Clientes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu_Administracion.add(jMenuItem1);
 
         jMenuItem_Citas.setText("Citas");
         jMenuItem_Citas.addActionListener(new java.awt.event.ActionListener() {
@@ -72,8 +81,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         PantallaCitas pc = new PantallaCitas(this, false, facadadeNegocio);
         pc.cargarCitas();
         pc.setVisible(true);
-        
     }//GEN-LAST:event_jMenuItem_CitasActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        PantallaClientes pc = new PantallaClientes(this, false, facadadeNegocio);
+        pc.cargarClientes();
+        pc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -112,6 +126,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem_Citas;
     private javax.swing.JMenu jMenu_Administracion;
     // End of variables declaration//GEN-END:variables
