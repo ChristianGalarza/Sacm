@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel_Titulo" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel_DatosCita" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="52" max="32767" attributes="0"/>
+                      <Component id="jPanel_ResumenCita" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButton_Cancelar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+              <Component id="jButton_GuardarCita" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel_Titulo" min="-2" pref="71" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel_ResumenCita" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jPanel_DatosCita" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton_Cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton_GuardarCita" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel_Titulo">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JPanel" name="jPanel_DatosCita">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSpinner_HoraCita" min="-2" pref="49" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jSpinner_MinutosCita" min="-2" pref="49" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+<<<<<<< HEAD
+                              <Component id="jTextField_Id" alignment="0" max="32767" attributes="0"/>
+=======
+                              <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+>>>>>>> Christian
+                              <Component id="jTextField_Nombre" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jComboBox_Servicios" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jDateChooser_FechaCita" alignment="0" pref="141" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButton_AgregarServicio" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                      <Component id="jTextField_Id" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> Christian
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="jTextField_Nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jComboBox_Servicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton_AgregarServicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jDateChooser_FechaCita" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jSpinner_HoraCita" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSpinner_MinutosCita" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JSpinner" name="jSpinner_MinutosCita">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" maximum="59" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton_AgregarServicio">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="+"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_AgregarServicioActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextField_Nombre">
+<<<<<<< HEAD
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField_NombreKeyPressed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField()"/>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="PantallaCita_jTextField_Nombre"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+          </AuxValues>
+=======
+>>>>>>> Christian
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nombre:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Servicio:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBox_Servicios">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="dcm" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;Servicioderelajacion&gt;()"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Servicioderelajacion&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser_FechaCita">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Hora:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="jSpinner_HoraCita">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="1" maximum="23" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Id:"/>
+          </Properties>
+        </Component>
+<<<<<<< HEAD
+        <Component class="javax.swing.JTextField" name="jTextField_Id">
+          <Properties>
+=======
+        <Component class="javax.swing.JTextField" name="jTextField1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="1"/>
+>>>>>>> Christian
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel_ResumenCita">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                      <Component id="jButton_EliminarServicio" alignment="0" min="-2" max="-2" attributes="0"/>
+=======
+                      <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+>>>>>>> Christian
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel_CostoTotal" max="32767" attributes="0"/>
+                      <Component id="jLabel_TiempoDeCita" pref="93" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="110" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
+                  <Component id="jButton_EliminarServicio" min="-2" max="-2" attributes="0"/>
+=======
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+>>>>>>> Christian
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel_CostoTotal" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" pref="25" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel_TiempoDeCita" max="32767" attributes="0"/>
+                      <Component id="jLabel6" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jTable_ResumenCita">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+              </Properties>
+<<<<<<< HEAD
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex){&#xa;        return false;&#xa;    }&#xa;}"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jButton_EliminarServicio">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar Servicio"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_EliminarServicioActionPerformed"/>
+          </Events>
+=======
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar Servicio"/>
+          </Properties>
+>>>>>>> Christian
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Costo Total:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Tiempo estimado de la cita:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel_CostoTotal">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel_TiempoDeCita">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="jButton_Cancelar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_CancelarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_GuardarCita">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Guardar Cita"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_GuardarCitaActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
