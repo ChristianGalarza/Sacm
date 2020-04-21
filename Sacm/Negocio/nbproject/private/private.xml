@@ -6,7 +6,14 @@
         <group/>
 =======
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Documents/Proyecto%20Integrador/Proyecto/Sacm/Sacm/Negocio/test/negocio/FacadadeNegocioTest.java</file>
+=======
+            <file>file:/D:/Documents/Proyecto%20Integrador/Proyecto/Sacm/Sacm/Negocio/src/negocio/IFacadadeNegocio.java</file>
+            <file>file:/D:/Documents/Proyecto%20Integrador/Proyecto/Sacm/Sacm/Negocio/src/negocio/ClienteControl.java</file>
+            <file>file:/D:/Documents/Proyecto%20Integrador/Proyecto/Sacm/Sacm/Negocio/src/main/pruebas.java</file>
+            <file>file:/D:/Documents/Proyecto%20Integrador/Proyecto/Sacm/Sacm/Negocio/src/negocio/FacadadeNegocio.java</file>
+>>>>>>> Christian
         </group>
 >>>>>>> master
     </open-files>

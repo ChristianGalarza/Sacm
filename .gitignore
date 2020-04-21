@@ -1,13 +1,23 @@
 <<<<<<< HEAD
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/Sacm/Dominio/build/
+/Sacm/Negocio/nbproject/private/
+=======
+>>>>>>> Christian
 =======
 /Sacm/Datos/build/
 /Sacm/Dominio/dist/
 /Sacm/Dominio/build/
 /Sacm/Datos/dist/
 >>>>>>> cambron
+<<<<<<< HEAD
 =======
 /Sacm/Dominio/build/
 /Sacm/Negocio/nbproject/private/
+>>>>>>> Christian
+=======
+>>>>>>> master
 >>>>>>> Christian
