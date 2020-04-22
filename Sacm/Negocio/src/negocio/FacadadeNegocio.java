@@ -7,6 +7,7 @@ package negocio;
 
 import dominio.Cita;
 import dominio.Cliente;
+import dominio.Producto;
 import dominio.Servicioderelajacion;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,12 +24,14 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     private CalendarControl calendarControl;
     private ServicioDeRelajacionControl serviciosControl;
     private ClienteControl clienteControl;
+    private ProductoControl productoControl;
 
     public FacadadeNegocio() {
         this.citaControl = new CitaControl();
         this.calendarControl = new CalendarControl();
         this.serviciosControl = new ServicioDeRelajacionControl();
         this.clienteControl = new ClienteControl();
+        this.productoControl = new ProductoControl();
     }
 
     @Override
@@ -153,4 +156,29 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     public Cliente obtenerCliente(int id) {
         return this.clienteControl.obtenerCliente(id);
     }    
+
+    @Override
+    public List<Producto> obtenerProductos() {
+        return this.productoControl.obtenerProductos();
+    }
+
+    @Override
+    public void agregarProducto(Producto t) {
+        this.productoControl.agregarProducto(t);
+    }
+
+    @Override
+    public void actualizarProducto(Producto t) {
+        this.productoControl.actualizarProducto(t);
+    }
+
+    @Override
+    public void eliminarProducto(int id) {
+        this.productoControl.eliminarProducto(id);
+    }
+
+    @Override
+    public Producto obtenerProducto(int id) {
+        return this.productoControl.obtenerProducto(id);
+    }
 }

@@ -5,6 +5,7 @@
     <class>dominio.Cliente</class>
     <class>dominio.Cita</class>
     <class>dominio.Servicioderelajacion</class>
+    <class>dominio.Producto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db-ino ne waata?useLegacyDatetimeCode=false&amp;serverTimezone=America/Mazatlan"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

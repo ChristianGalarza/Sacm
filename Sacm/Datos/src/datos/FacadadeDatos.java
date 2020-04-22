@@ -7,6 +7,7 @@ package datos;
 
 import dominio.Cita;
 import dominio.Cliente;
+import dominio.Producto;
 import dominio.Servicioderelajacion;
 import java.util.Date;
 import java.util.List;
@@ -20,11 +21,13 @@ public class FacadadeDatos implements IFacadadeDatos{
     private DAOBase<Cita> daoCita;
     private DAOBase<Servicioderelajacion> daoServicioDeRelajacion;
     private DAOBase<Cliente> daoCliente;
+    private DAOBase<Producto> daoProducto;
 
     public FacadadeDatos() {
         this.daoCita = new CitaDAO();
         this.daoServicioDeRelajacion = new ServicioDeRelajacionDAO();
         this.daoCliente = new ClienteDAO();
+        this.daoProducto = new ProductoDAO();
     }
 
     @Override
@@ -110,6 +113,31 @@ public class FacadadeDatos implements IFacadadeDatos{
     @Override
     public Servicioderelajacion obtenerServicioderelajacion(int id) {
         return this.daoServicioDeRelajacion.obtener(id);
+    }
+
+    @Override
+    public List<Producto> obtenerProductos() {
+        return this.daoProducto.obtenerTodos();
+    }
+
+    @Override
+    public void agregarProducto(Producto t) {
+        this.daoProducto.agregar(t);
+    }
+
+    @Override
+    public void actualizarProducto(Producto t) {
+        this.daoProducto.actualizar(t);
+    }
+
+    @Override
+    public void eliminarProducto(int id) {
+        this.daoProducto.eliminar(id);
+    }
+
+    @Override
+    public Producto obtenerProducto(int id) {
+        return this.daoProducto.obtener(id);
     }
     
     

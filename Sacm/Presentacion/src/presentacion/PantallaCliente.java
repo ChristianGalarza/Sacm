@@ -5,24 +5,13 @@
  */
 package presentacion;
 
-import dominio.Cita;
 import constantes.Constantes;
 import dominio.Cliente;
-import dominio.Servicioderelajacion;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
 import negocio.IFacadadeNegocio;
 import com.mxrck.autocompleter.*;
-import javafx.scene.paint.Color;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -36,7 +25,7 @@ public class PantallaCliente extends javax.swing.JDialog{
     private int operacion;
     private IFacadadeNegocio facadadeNegocio;
     private TextAutoCompleter textAutoCompleter;
-    private Autocompletar autocompletar;
+    //private Autocompletar autocompletar;
     
     /**
      * Creates new form PantallaCita
@@ -46,8 +35,8 @@ public class PantallaCliente extends javax.swing.JDialog{
         this.facadadeNegocio = facadadeNegocio;
         initComponents();
         
-        this.autocompletar = new Autocompletar(this.jTextField4_Recomendador);
-        this.textAutoCompleter = new TextAutoCompleter(jTextField4_Recomendador,this.autocompletar);
+//        this.autocompletar = new Autocompletar(this.jTextField4_Recomendador);
+        this.textAutoCompleter = new TextAutoCompleter(jTextField4_Recomendador);
         this.textAutoCompleter.setMode(0);
         this.setLocationRelativeTo(null);
     }
@@ -177,6 +166,7 @@ public class PantallaCliente extends javax.swing.JDialog{
 
         jLabel9.setText("Edad:");
 
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Correo:");
 
         jTextField2_Correo.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +190,7 @@ public class PantallaCliente extends javax.swing.JDialog{
         jPanel_DatosCitaLayout.setHorizontalGroup(
             jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_DatosCitaLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel_DatosCitaLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -222,7 +212,7 @@ public class PantallaCliente extends javax.swing.JDialog{
                             .addComponent(jSpinner1_Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1_Apellido)
                             .addComponent(jTextField2_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20))
+                .addGap(164, 164, 164))
         );
         jPanel_DatosCitaLayout.setVerticalGroup(
             jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,21 +262,23 @@ public class PantallaCliente extends javax.swing.JDialog{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_Cancelar)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton_GuardarCliente)))
-                .addGap(158, 158, 158))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 169, Short.MAX_VALUE)
-                .addComponent(jPanel_DatosCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton_Cancelar)
+                                .addGap(63, 63, 63)
+                                .addComponent(jButton_GuardarCliente)
+                                .addGap(158, 158, 158))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel_DatosCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,7 +299,7 @@ public class PantallaCliente extends javax.swing.JDialog{
 
     private void jButton_GuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarClienteActionPerformed
         //VALIDAR CAMPOS
-//        
+        this.clienteRecomendador = (Cliente)this.textAutoCompleter.getItemSelected();
         if (operacion == Constantes.AGREGAR) {
             if (this.validarCampos(Constantes.AGREGAR)) {
                 if (this.mostrarMensajeDeConfirmacion("¿Desea guardar el cliente?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -317,6 +309,7 @@ public class PantallaCliente extends javax.swing.JDialog{
                     this.cliente.setEdad((short)((int)this.jSpinner1_Edad.getValue()));
                     this.cliente.setCorreo(this.jTextField2_Correo.getText());
                     this.cliente.setCelular(this.jTextField3_Celular.getText());
+                    this.cliente.setIdClienteRecomendador(clienteRecomendador);
                     if (verificarCliente(cliente)) {
                         this.facadadeNegocio.agregarCliente(cliente);
                         this.mostrarMensajeDeAdvertencia("Cliente guardado correctamente", JOptionPane.INFORMATION_MESSAGE);
@@ -340,6 +333,7 @@ public class PantallaCliente extends javax.swing.JDialog{
                     this.cliente.setEdad((short)this.jSpinner1_Edad.getValue());
                     this.cliente.setCorreo(this.jTextField2_Correo.getText());
                     this.cliente.setCelular(this.jTextField3_Celular.getText());
+                    this.cliente.setIdClienteRecomendador(clienteRecomendador);
                     this.facadadeNegocio.actualizarCliente(cliente);
                 }
             } else {
@@ -443,25 +437,5 @@ public class PantallaCliente extends javax.swing.JDialog{
     private javax.swing.JTextField jTextField_Nombre;
     // End of variables declaration//GEN-END:variables
 
-private class Autocompletar implements AutoCompleterCallback {
 
-        private JTextField id;
-        
-        public Autocompletar(JTextField id) {
-            this.id = id;
-        }
-
-        @Override
-        public void callback(Object o) {
-            this.id.setText(((Cliente)o).getIdCliente()+"");
-        }
-
-        public JTextField getId() {
-            return id;
-        }
-
-        public void setId(JTextField id) {
-            this.id = id;
-        }
-    }
 }

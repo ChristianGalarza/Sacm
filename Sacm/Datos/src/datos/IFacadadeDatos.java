@@ -9,6 +9,7 @@ import controlJPA.exceptions.IllegalOrphanException;
 import controlJPA.exceptions.NonexistentEntityException;
 import dominio.Cita;
 import dominio.Cliente;
+import dominio.Producto;
 import dominio.Servicioderelajacion;
 import java.util.Date;
 import java.util.List;
@@ -54,5 +55,15 @@ public interface IFacadadeDatos {
     public void eliminarServicioderelajacion(int id);
 
     public Servicioderelajacion obtenerServicioderelajacion(int id);
+    
+    public List<Producto> obtenerProductos();
+
+    public void agregarProducto(Producto t);
+
+    public void actualizarProducto(Producto t);
+
+    public void eliminarProducto(int id);
+
+    public Producto obtenerProducto(int id);
     
 }

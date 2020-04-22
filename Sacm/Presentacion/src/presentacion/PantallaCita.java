@@ -14,15 +14,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import negocio.IFacadadeNegocio;
 import com.mxrck.autocompleter.*;
-import javafx.scene.paint.Color;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 
 /**
  *

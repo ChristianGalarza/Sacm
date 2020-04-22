@@ -7,8 +7,8 @@ package negocio;
 
 import dominio.Cita;
 import dominio.Cliente;
+import dominio.Producto;
 import dominio.Servicioderelajacion;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -62,4 +62,14 @@ public interface IFacadadeNegocio {
     public void eliminarCliente(int id);
 
     public Cliente obtenerCliente(int id);
+    
+    public List<Producto> obtenerProductos();
+
+    public void agregarProducto(Producto t);
+    
+    public void actualizarProducto(Producto t);
+
+    public void eliminarProducto(int id);
+
+    public Producto obtenerProducto(int id);
 }
