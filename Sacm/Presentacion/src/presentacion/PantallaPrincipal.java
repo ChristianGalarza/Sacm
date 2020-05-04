@@ -38,6 +38,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenu_Administracion = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem_Citas = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem_Servicios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +60,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu_Administracion.add(jMenuItem_Citas);
+
+        jMenuItem2.setText("Productos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu_Administracion.add(jMenuItem2);
+
+        jMenuItem_Servicios.setText("Servicios");
+        jMenu_Administracion.add(jMenuItem_Servicios);
 
         jMenuBar1.add(jMenu_Administracion);
 
@@ -88,6 +101,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         pc.cargarClientes();
         pc.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        PantallaProductos pc = new PantallaProductos(this, false, facadadeNegocio);
+        pc.cargarProductos();
+        pc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -127,7 +146,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem_Citas;
+    private javax.swing.JMenuItem jMenuItem_Servicios;
     private javax.swing.JMenu jMenu_Administracion;
     // End of variables declaration//GEN-END:variables
 }
