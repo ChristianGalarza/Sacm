@@ -181,4 +181,19 @@ public class FacadadeNegocio implements IFacadadeNegocio{
     public Producto obtenerProducto(int id) {
         return this.productoControl.obtenerProducto(id);
     }
+
+    @Override
+    public void agregarServicioDeRelajacion(Servicioderelajacion servicio) {
+        this.serviciosControl.agregarServicioDeRelajacion(servicio);
+    }
+
+    @Override
+    public void eliminarServicioDeRelajacion(Servicioderelajacion servicio) {
+        this.serviciosControl.eliminarServicioDeRelajacion(servicio.getIdServicioDeRelajacion());
+    }
+
+    @Override
+    public void actualizarServicioDeRelajacion(Servicioderelajacion servicio) {
+        this.serviciosControl.actualizarServicioDeRelajacion(servicio);
+    }
 }

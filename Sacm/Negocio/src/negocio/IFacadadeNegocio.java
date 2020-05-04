@@ -48,6 +48,12 @@ public interface IFacadadeNegocio {
     public Date convertirHoras(int hora, int minuto);
 
     public List<Servicioderelajacion> obtenerServiciosDeRelajacion();
+    
+    public void agregarServicioDeRelajacion(Servicioderelajacion servicio);
+    
+    public void eliminarServicioDeRelajacion(Servicioderelajacion servicio);
+    
+    public void actualizarServicioDeRelajacion(Servicioderelajacion servicio);
 
     public List<Cliente> obtenerClientes();
 
