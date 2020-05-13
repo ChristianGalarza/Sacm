@@ -27,6 +27,7 @@ CREATE TABLE `servicioderelajacion` (
   `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `duracion` time DEFAULT NULL,
   `costo` float DEFAULT NULL,
+  `descripcion` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idServicioDeRelajacion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +38,6 @@ CREATE TABLE `servicioderelajacion` (
 
 LOCK TABLES `servicioderelajacion` WRITE;
 /*!40000 ALTER TABLE `servicioderelajacion` DISABLE KEYS */;
-INSERT INTO `servicioderelajacion` VALUES (3,'masaje relajante','01:00:00',500),(4,'masaje relajante premium','02:00:00',900);
 /*!40000 ALTER TABLE `servicioderelajacion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-29 21:16:51
+-- Dump completed on 2020-05-13 12:27:01

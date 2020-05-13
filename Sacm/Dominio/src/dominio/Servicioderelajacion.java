@@ -38,6 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Servicioderelajacion.findByCosto", query = "SELECT s FROM Servicioderelajacion s WHERE s.costo = :costo")})
 public class Servicioderelajacion implements Serializable {
 
+    @Column(name = "descripcion")
+    private String descripcion;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -126,6 +129,14 @@ public class Servicioderelajacion implements Serializable {
     @Override
     public String toString() {
         return this.getNombre();
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
 }

@@ -345,7 +345,7 @@ public class PantallaServicio extends javax.swing.JDialog{
     public boolean verificarServicio(Servicioderelajacion servicio){
         List<Servicioderelajacion> listServiciosAuxiliar = facadadeNegocio.obtenerServiciosDeRelajacion();
         for (Servicioderelajacion servicioAux : listServiciosAuxiliar) {
-            if (servicioAux.getNombre()==(servicio.getNombre())) {
+            if (servicioAux.getNombre().equals(servicio.getNombre())) {
                 return false;
             }
         }
