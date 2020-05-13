@@ -67,6 +67,7 @@ public class PantallaServicio extends javax.swing.JDialog{
             this.jSpinner1_hora.setValue(servicio.getDuracion().getHours());
             this.jSpinner1_Minuto.setValue(servicio.getDuracion().getMinutes());
             this.jSpinner1_costo.setValue(servicio.getCosto());
+            this.jTextArea_Descripcion.setText(servicio.getDescripcion());
         }
         
         if(operacion == Constantes.MODIFICAR || operacion == Constantes.AGREGAR) {
@@ -80,6 +81,7 @@ public class PantallaServicio extends javax.swing.JDialog{
         this.jSpinner1_hora.setEnabled(bln);
         this.jSpinner1_Minuto.setEnabled(bln);
         this.jSpinner1_costo.setEnabled(bln);
+        this.jTextArea_Descripcion.setEnabled(bln);
     }
     
     public void cerrarPantalla() {
@@ -92,6 +94,7 @@ public class PantallaServicio extends javax.swing.JDialog{
         this.jSpinner1_hora.setValue(0);
         this.jSpinner1_Minuto.setValue(0);
         this.jSpinner1_costo.setValue(0);
+        this.jTextArea_Descripcion.setText("");
     }
     
     public void mostrarPantalla(int operacion, Servicioderelajacion servicio) {
@@ -123,6 +126,9 @@ public class PantallaServicio extends javax.swing.JDialog{
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSpinner1_costo = new javax.swing.JSpinner();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea_Descripcion = new javax.swing.JTextArea();
         jButton_Cancelar = new javax.swing.JButton();
         jButton_GuardarCliente = new javax.swing.JButton();
 
@@ -156,31 +162,43 @@ public class PantallaServicio extends javax.swing.JDialog{
 
         jLabel3.setText("min");
 
+        jLabel4.setText("Descripción:");
+
+        jTextArea_Descripcion.setColumns(20);
+        jTextArea_Descripcion.setRows(5);
+        jScrollPane1.setViewportView(jTextArea_Descripcion);
+
         javax.swing.GroupLayout jPanel_DatosCitaLayout = new javax.swing.GroupLayout(jPanel_DatosCita);
         jPanel_DatosCita.setLayout(jPanel_DatosCitaLayout);
         jPanel_DatosCitaLayout.setHorizontalGroup(
             jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_DatosCitaLayout.createSequentialGroup()
+            .addGroup(jPanel_DatosCitaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField_Id, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                        .addGroup(jPanel_DatosCitaLayout.createSequentialGroup()
-                            .addComponent(jSpinner1_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jSpinner1_Minuto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel3))
-                        .addComponent(jTextField1_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                    .addComponent(jSpinner1_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_DatosCitaLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_DatosCitaLayout.createSequentialGroup()
+                        .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField_Id, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addGroup(jPanel_DatosCitaLayout.createSequentialGroup()
+                                    .addComponent(jSpinner1_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jSpinner1_Minuto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3))
+                                .addComponent(jTextField1_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                            .addComponent(jSpinner1_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_DatosCitaLayout.setVerticalGroup(
@@ -205,7 +223,11 @@ public class PantallaServicio extends javax.swing.JDialog{
                 .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(jSpinner1_costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_DatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton_Cancelar.setText("Cancelar");
@@ -270,6 +292,7 @@ public class PantallaServicio extends javax.swing.JDialog{
                     this.servicio.setNombre(this.jTextField1_Nombre.getText());
                     this.servicio.setDuracion(this.facadadeNegocio.convertirHoras((int) this.jSpinner1_hora.getValue(), (int) this.jSpinner1_Minuto.getValue()));
                     this.servicio.setCosto((float)(int)this.jSpinner1_costo.getValue());
+                    this.servicio.setDescripcion(this.jTextArea_Descripcion.getText());
                     if (verificarServicio(servicio)) {
                         this.facadadeNegocio.agregarServicioDeRelajacion(servicio);
                         this.mostrarMensajeDeAdvertencia("Servicio guardado correctamente", JOptionPane.INFORMATION_MESSAGE);
@@ -287,6 +310,7 @@ public class PantallaServicio extends javax.swing.JDialog{
                     this.servicio.setNombre(this.jTextField1_Nombre.getText());
                     this.servicio.setCosto((float)(int)this.jSpinner1_costo.getValue());
                     this.servicio.setDuracion(this.facadadeNegocio.convertirHoras((int) this.jSpinner1_hora.getValue(), (int) this.jSpinner1_Minuto.getValue()));
+                    this.servicio.setDescripcion(this.jTextArea_Descripcion.getText());
                     this.facadadeNegocio.actualizarServicioDeRelajacion(servicio);
                 }
             } else {
@@ -327,6 +351,10 @@ public class PantallaServicio extends javax.swing.JDialog{
             mostrarMensajeDeAdvertencia("Ingrese un Nombre", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        if(this.jTextArea_Descripcion.getText().equals("")) {
+            mostrarMensajeDeAdvertencia("Ingrese una Descripción", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         if((int)this.jSpinner1_hora.getValue()< 0) {
             mostrarMensajeDeAdvertencia("Ingrese una hora correcta", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -359,13 +387,16 @@ public class PantallaServicio extends javax.swing.JDialog{
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Titulo;
     private javax.swing.JPanel jPanel_DatosCita;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1_Minuto;
     private javax.swing.JSpinner jSpinner1_costo;
     private javax.swing.JSpinner jSpinner1_hora;
+    private javax.swing.JTextArea jTextArea_Descripcion;
     private javax.swing.JTextField jTextField1_Nombre;
     private javax.swing.JTextField jTextField_Id;
     // End of variables declaration//GEN-END:variables

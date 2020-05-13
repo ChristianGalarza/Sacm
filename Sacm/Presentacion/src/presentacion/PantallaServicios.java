@@ -41,7 +41,7 @@ public class PantallaServicios extends javax.swing.JDialog {
     public void cargarServicios() {
         this.listaDeServicios = facadadeNegocio.obtenerServiciosDeRelajacion();
         String nombreColumnas [] = {"ID","Nombre","Duracion","Costo"};
-        String servicio[][]= new String[this.listaDeServicios.size()][4];
+        String servicio[][]= new String[this.listaDeServicios.size()][5];
         Servicioderelajacion servicioAuxiliar;
         DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
         int saltosdeLinea = 1;
@@ -52,6 +52,7 @@ public class PantallaServicios extends javax.swing.JDialog {
             String strDate=dateFormat.format(servicioAuxiliar.getDuracion());
             servicio[i][2] = strDate;
             servicio[i][3] = Float.toString(servicioAuxiliar.getCosto());
+            servicio[i][4] = servicioAuxiliar.getDescripcion();
         }
         jTable_Servicio.setRowHeight(saltosdeLinea*this.ESPACIO_ENTRE_LINEAS);
         
