@@ -15,6 +15,7 @@ import dominio.Servicioderelajacion;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import negocio.ServicioDeRelajacionControl;
 
 /**
  *
@@ -266,15 +267,14 @@ public class PantallaServicio extends javax.swing.JDialog{
             if (this.validarCampos(Constantes.AGREGAR)) {
                 if (this.mostrarMensajeDeConfirmacion("¿Desea guardar el servicio?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     this.servicio = new Servicioderelajacion();
-                    this.servicio.setIdServicioDeRelajacion(Integer.parseInt(jTextField_Id.getText()));
                     this.servicio.setNombre(this.jTextField1_Nombre.getText());
                     this.servicio.setDuracion(this.facadadeNegocio.convertirHoras((int) this.jSpinner1_hora.getValue(), (int) this.jSpinner1_Minuto.getValue()));
-                    this.servicio.setCosto((float)this.jSpinner1_costo.getValue());
+                    this.servicio.setCosto((float)(int)this.jSpinner1_costo.getValue());
                     if (verificarServicio(servicio)) {
-//                        this.facadadeNegocio.(servicio);
+                        this.facadadeNegocio.agregarServicioDeRelajacion(servicio);
                         this.mostrarMensajeDeAdvertencia("Servicio guardado correctamente", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        this.mostrarMensajeDeAdvertencia("Ya existe un servicio con el mismo id", JOptionPane.INFORMATION_MESSAGE);
+                        this.mostrarMensajeDeAdvertencia("Ya existe un servicio con el mismo nombre", JOptionPane.INFORMATION_MESSAGE);
                         return;
                     }
                 }
@@ -283,20 +283,19 @@ public class PantallaServicio extends javax.swing.JDialog{
             }
         } else if (operacion == Constantes.MODIFICAR) {
             if (this.validarCampos(Constantes.MODIFICAR)) {
-                if (this.mostrarMensajeDeConfirmacion("¿Desea actualizar el producto?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                    this.producto.setIdProducto(this.jTextField_Id.getText());
-//                    this.producto.setNombre(this.jTextField1_Nombre.getText());
-//                    this.producto.setCosto((float)(int)this.jSpinner1_hora.getValue());
-//                    this.producto.setDescripcion(this.jTextArea_Descripcion.getText());
-//                    this.facadadeNegocio.actualizarProducto(producto);
+                if (this.mostrarMensajeDeConfirmacion("¿Desea actualizar el servicio?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    this.servicio.setNombre(this.jTextField1_Nombre.getText());
+                    this.servicio.setCosto((float)(int)this.jSpinner1_costo.getValue());
+                    this.servicio.setDuracion(this.facadadeNegocio.convertirHoras((int) this.jSpinner1_hora.getValue(), (int) this.jSpinner1_Minuto.getValue()));
+                    this.facadadeNegocio.actualizarServicioDeRelajacion(servicio);
                 }
             } else {
                 return;
             }
         } else if (this.operacion == Constantes.ELIMINAR) {
-            if(this.mostrarMensajeDeConfirmacion("¿Desea eliminar el producto?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                this.facadadeNegocio.eliminarProducto(Integer.parseInt(this.producto.getIdProducto()));
-                this.mostrarMensajeDeAdvertencia("Producto eliminada correctamente",JOptionPane.INFORMATION_MESSAGE);
+            if(this.mostrarMensajeDeConfirmacion("¿Desea eliminar el servicio?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                this.facadadeNegocio.eliminarServicioDeRelajacion(this.servicio);
+                this.mostrarMensajeDeAdvertencia("Servicio eliminado correctamente",JOptionPane.INFORMATION_MESSAGE);
             }
         }
 //        
@@ -324,35 +323,21 @@ public class PantallaServicio extends javax.swing.JDialog{
     }
     
     public boolean validarCampos(int operacion) {
-        if(this.jTextField_Id.getText().equals("")) {
-            mostrarMensajeDeAdvertencia("Ingrese un id", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
         if(this.jTextField1_Nombre.getText().equals("")) {
             mostrarMensajeDeAdvertencia("Ingrese un Nombre", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if (operacion==2) {
-            if((int)this.jSpinner1_hora.getValue()<= 0) {
+        if((int)this.jSpinner1_hora.getValue()< 0) {
             mostrarMensajeDeAdvertencia("Ingrese una hora correcta", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if(operacion==1){
-                if((int)this.jSpinner1_hora.getValue() <= 0) {
-                mostrarMensajeDeAdvertencia("Ingrese una hora correcta", JOptionPane.ERROR_MESSAGE);
-                return false;
-                }
-            }
         }
-        if (operacion==2) {
-            if((int)this.jSpinner1_Minuto.getValue()<= 0) {
+        if((int)this.jSpinner1_Minuto.getValue()< 0) {
             mostrarMensajeDeAdvertencia("Ingrese un minuto correcto", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if(operacion==1){
-                if((float)(int)this.jSpinner1_Minuto.getValue() <= 0) {
-                mostrarMensajeDeAdvertencia("Ingrese un minuto correcto", JOptionPane.ERROR_MESSAGE);
-                return false;
-                }
-            }
+        }
+        if ((int)this.jSpinner1_costo.getValue()<=0) {
+            mostrarMensajeDeAdvertencia("Ingrese un precio correcto", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         return true;   
     }
@@ -360,7 +345,7 @@ public class PantallaServicio extends javax.swing.JDialog{
     public boolean verificarServicio(Servicioderelajacion servicio){
         List<Servicioderelajacion> listServiciosAuxiliar = facadadeNegocio.obtenerServiciosDeRelajacion();
         for (Servicioderelajacion servicioAux : listServiciosAuxiliar) {
-            if (servicioAux.getIdServicioDeRelajacion()==(servicio.getIdServicioDeRelajacion())) {
+            if (servicioAux.getNombre()==(servicio.getNombre())) {
                 return false;
             }
         }
