@@ -70,6 +70,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenu_Administracion.add(jMenuItem2);
 
         jMenuItem_Servicios.setText("Servicios");
+        jMenuItem_Servicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ServiciosActionPerformed(evt);
+            }
+        });
         jMenu_Administracion.add(jMenuItem_Servicios);
 
         jMenuBar1.add(jMenu_Administracion);
@@ -107,6 +112,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         pc.cargarProductos();
         pc.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem_ServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ServiciosActionPerformed
+        PantallaServicios pc = new PantallaServicios(this, false, facadadeNegocio);
+        pc.cargarServicios();
+        pc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_ServiciosActionPerformed
 
 //    /**
 //     * @param args the command line arguments
