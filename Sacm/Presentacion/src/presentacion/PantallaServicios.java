@@ -40,7 +40,7 @@ public class PantallaServicios extends javax.swing.JDialog {
     
     public void cargarServicios() {
         this.listaDeServicios = facadadeNegocio.obtenerServiciosDeRelajacion();
-        String nombreColumnas [] = {"ID","Nombre","Duracion","Costo"};
+        String nombreColumnas [] = {"ID","Nombre","Duracion","Costo","Descripción"};
         String servicio[][]= new String[this.listaDeServicios.size()][5];
         Servicioderelajacion servicioAuxiliar;
         DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
@@ -82,13 +82,13 @@ public class PantallaServicios extends javax.swing.JDialog {
 
         jTable_Servicio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "idCliente", "Title 2", "Title 3", "Title 4"
+                "idCliente", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
         jScrollPane2.setViewportView(jTable_Servicio);
