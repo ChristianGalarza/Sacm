@@ -93,7 +93,7 @@ public class PantallaServicio extends javax.swing.JDialog{
         this.jTextField1_Nombre.setText("");
         this.jSpinner1_hora.setValue(0);
         this.jSpinner1_Minuto.setValue(0);
-        this.jSpinner1_costo.setValue(0);
+        this.jSpinner1_costo.setValue(0.0f);
         this.jTextArea_Descripcion.setText("");
     }
     
@@ -155,12 +155,18 @@ public class PantallaServicio extends javax.swing.JDialog{
 
         jLabel9.setText("Duración:");
 
+        jSpinner1_hora.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Costo:");
+
+        jSpinner1_Minuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
         jLabel1.setText("hr");
 
         jLabel3.setText("min");
+
+        jSpinner1_costo.setModel(new javax.swing.SpinnerNumberModel(0.0f, 0.0f, null, 1.0f));
 
         jLabel4.setText("Descripción:");
 
@@ -291,7 +297,7 @@ public class PantallaServicio extends javax.swing.JDialog{
                     this.servicio = new Servicioderelajacion();
                     this.servicio.setNombre(this.jTextField1_Nombre.getText());
                     this.servicio.setDuracion(this.facadadeNegocio.convertirHoras((int) this.jSpinner1_hora.getValue(), (int) this.jSpinner1_Minuto.getValue()));
-                    this.servicio.setCosto((float)(int)this.jSpinner1_costo.getValue());
+                    this.servicio.setCosto((float)this.jSpinner1_costo.getValue());
                     this.servicio.setDescripcion(this.jTextArea_Descripcion.getText());
                     if (verificarServicio(servicio)) {
                         this.facadadeNegocio.agregarServicioDeRelajacion(servicio);
@@ -308,7 +314,7 @@ public class PantallaServicio extends javax.swing.JDialog{
             if (this.validarCampos(Constantes.MODIFICAR)) {
                 if (this.mostrarMensajeDeConfirmacion("¿Desea actualizar el servicio?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     this.servicio.setNombre(this.jTextField1_Nombre.getText());
-                    this.servicio.setCosto((float)(int)this.jSpinner1_costo.getValue());
+                    this.servicio.setCosto((float)this.jSpinner1_costo.getValue());
                     this.servicio.setDuracion(this.facadadeNegocio.convertirHoras((int) this.jSpinner1_hora.getValue(), (int) this.jSpinner1_Minuto.getValue()));
                     this.servicio.setDescripcion(this.jTextArea_Descripcion.getText());
                     this.facadadeNegocio.actualizarServicioDeRelajacion(servicio);
@@ -363,7 +369,7 @@ public class PantallaServicio extends javax.swing.JDialog{
             mostrarMensajeDeAdvertencia("Ingrese un minuto correcto", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if ((int)this.jSpinner1_costo.getValue()<=0) {
+        if ((float)this.jSpinner1_costo.getValue()<=0) {
             mostrarMensajeDeAdvertencia("Ingrese un precio correcto", JOptionPane.ERROR_MESSAGE);
             return false;
         }

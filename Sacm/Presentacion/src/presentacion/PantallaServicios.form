@@ -108,14 +108,16 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="jButton_EliminarServicio" max="32767" attributes="0"/>
-                      <Component id="jButton_ModificarServicio" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton_AgregarServicio" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jButton_AgregarServicio" max="32767" attributes="0"/>
+                          <Component id="jButton_ModificarServicio" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

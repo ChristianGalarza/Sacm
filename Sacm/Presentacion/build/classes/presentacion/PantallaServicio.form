@@ -184,6 +184,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinner1_hora">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" maximum="23" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
@@ -192,6 +197,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinner1_Minuto">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" maximum="59" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -204,6 +214,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinner1_costo">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" minimum="0.0" numberType="java.lang.Float" stepSize="1.0" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
