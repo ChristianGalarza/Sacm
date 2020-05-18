@@ -24,9 +24,9 @@ public class CalendarControl {
         String MES[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
         // Dias de la semana
-        String DIA[] = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
+        String DIA[] = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado","Domingo"};
 
-        String fechaObtenida = DIA[calendar.get(Calendar.DAY_OF_WEEK) - 1] + " " + calendar.get(Calendar.DAY_OF_MONTH) + " de " + MES[calendar.get(Calendar.MONTH)] + " del " + calendar.get(Calendar.YEAR);
+        String fechaObtenida = DIA[calendar.get(Calendar.DAY_OF_WEEK)] + " " + (calendar.get(Calendar.DAY_OF_MONTH)+1) + " de " + MES[calendar.get(Calendar.MONTH)] + " del " + calendar.get(Calendar.YEAR);
 
         return fechaObtenida;
     }

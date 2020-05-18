@@ -22,6 +22,7 @@ public class PantallaCitas extends javax.swing.JDialog {
     private IFacadadeNegocio facadadeNegocio;
     private List<Cita> listaDeCitas;
     private Calendar fechaActual;
+    private Calendar fechaActual2;
     /**
      * Creates new form PantallaCitas
      * @param parent
@@ -33,12 +34,14 @@ public class PantallaCitas extends javax.swing.JDialog {
         initComponents();
         this.facadadeNegocio = facadadeNegocio;
         this.fechaActual = Calendar.getInstance();
+        fechaActual.add(Calendar.DATE,-1);
+        fechaActual2 = Calendar.getInstance();
         this.jLabel_Fecha.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
         this.setLocationRelativeTo(null);
     }
     
     public void cargarCitas() {
-        this.listaDeCitas = facadadeNegocio.obtenerCitasPorFecha(fechaActual.getTime());
+        this.listaDeCitas = facadadeNegocio.obtenerCitasPorFecha(fechaActual2.getTime());
         String nombreColumnas [] = {"Fecha","Hora","Nombre","Servicio","Precio"};
         String cita[][]= new String[this.listaDeCitas.size()][5];
         Cita citaAuxiliar;
@@ -52,7 +55,7 @@ public class PantallaCitas extends javax.swing.JDialog {
             cita[i][3] = citaAuxiliar.getServicios();
             cita[i][4] = citaAuxiliar.getCostoTotal().toString();
             if (saltosdeLinea > cita[i][3].split("<br>").length) {
-                saltosdeLinea =cita[i][3].split("<br>").length;
+                saltosdeLinea = cita[i][3].split("<br>").length;
             }
         }
         jTable_Citas.setRowHeight(saltosdeLinea*this.ESPACIO_ENTRE_LINEAS);
@@ -62,6 +65,7 @@ public class PantallaCitas extends javax.swing.JDialog {
     
     public void cambiarFecha(int movimiento) {
         this.fechaActual.add(Calendar.DATE, movimiento);
+        this.fechaActual2.add(Calendar.DATE, movimiento);
         this.jLabel_Fecha.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
         this.cargarCitas();
     }
@@ -199,9 +203,9 @@ public class PantallaCitas extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

@@ -32,7 +32,7 @@ public class PantallaCita extends javax.swing.JDialog{
     private float costoTotal;
     private Date duracion;
     private IFacadadeNegocio facadadeNegocio;
-    private List<Servicioderelajacion> listaDeServicioDerelajacionDisponibles;
+    //private List<Servicioderelajacion> listaDeServicioDerelajacionDisponibles;
     private List<Servicioderelajacion> listaDeServicioDerelajacionResumen;
     private DefaultComboBoxModel<Servicioderelajacion> dcm;
     private TextAutoCompleter textAutoCompleter;
@@ -432,7 +432,7 @@ public class PantallaCita extends javax.swing.JDialog{
                     this.cita.setHora(this.facadadeNegocio.convertirHoras((int) this.jSpinner_HoraCita.getValue(), (int) this.jSpinner_MinutosCita.getValue()));
                     this.cita.setServicioderelajacionList(listaDeServicioDerelajacionResumen);
                     this.cita.setHoraFin(this.facadadeNegocio.sumarHora(this.cita.getHora(), this.cita.getDuracion()));
-                    if (this.facadadeNegocio.verificarCitasEmpalmadas(cita).isEmpty()) {
+                    if (!this.facadadeNegocio.verificarCitasEmpalmadas(cita).contains(cita)) {
                         this.facadadeNegocio.agregarCita(cita);
                         this.mostrarMensajeDeAdvertencia("Cita guardada correctamente", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -442,8 +442,6 @@ public class PantallaCita extends javax.swing.JDialog{
 
                 }
 
-            } else {
-                return;
             }
 
         } else if (operacion == Constantes.MODIFICAR) {
