@@ -36,10 +36,6 @@ public class PantallaCliente extends javax.swing.JDialog{
         initComponents();
         this.textAutoCompleter = new TextAutoCompleter(jTextField4_Recomendador);
         this.textAutoCompleter.setMode(0);
-        
-//        this.autocompletar = new Autocompletar(this.jTextField4_Recomendador);
-        
-        
         this.setLocationRelativeTo(null);
     }
     
@@ -109,7 +105,7 @@ public class PantallaCliente extends javax.swing.JDialog{
         this.textAutoCompleter.removeAllItems();        
         this.jTextField2_Correo.setText("");
         this.jTextField1_Apellido.setText("");
-        this.jSpinner1_Edad.setValue(0);
+        this.jSpinner1_Edad.setValue((short)1);
         this.jTextField3_Celular.setText("");
         this.jTextField4_Recomendador.setText("");
     }
@@ -170,7 +166,7 @@ public class PantallaCliente extends javax.swing.JDialog{
 
         jLabel9.setText("Edad:");
 
-        jSpinner1_Edad.setModel(new javax.swing.SpinnerNumberModel(Short.valueOf((short)1), Short.valueOf((short)1), Short.valueOf((short)130), Short.valueOf((short)1)));
+        jSpinner1_Edad.setModel(new javax.swing.SpinnerNumberModel(Short.valueOf((short)1), Short.valueOf((short)1), Short.valueOf((short)125), Short.valueOf((short)1)));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Correo:");
@@ -314,7 +310,7 @@ public class PantallaCliente extends javax.swing.JDialog{
                     this.cliente = new Cliente();
                     this.cliente.setNombre(this.jTextField_Nombre.getText());
                     this.cliente.setApellido(this.jTextField1_Apellido.getText());
-                    this.cliente.setEdad((short)((int)this.jSpinner1_Edad.getValue()));
+                    this.cliente.setEdad((short)this.jSpinner1_Edad.getValue());
                     this.cliente.setCorreo(this.jTextField2_Correo.getText());
                     this.cliente.setCelular(this.jTextField3_Celular.getText());
                     this.cliente.setIdClienteRecomendador(clienteRecomendador);
