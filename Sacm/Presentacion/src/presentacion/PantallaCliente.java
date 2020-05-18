@@ -34,10 +34,12 @@ public class PantallaCliente extends javax.swing.JDialog{
         super(parent, modal);
         this.facadadeNegocio = facadadeNegocio;
         initComponents();
-        
-//        this.autocompletar = new Autocompletar(this.jTextField4_Recomendador);
         this.textAutoCompleter = new TextAutoCompleter(jTextField4_Recomendador);
         this.textAutoCompleter.setMode(0);
+        
+//        this.autocompletar = new Autocompletar(this.jTextField4_Recomendador);
+        
+        
         this.setLocationRelativeTo(null);
     }
     
@@ -73,11 +75,13 @@ public class PantallaCliente extends javax.swing.JDialog{
             if (cliente.getIdClienteRecomendador()==null) {
                 this.jTextField4_Recomendador.setText("");
             }else{
-                this.jTextField4_Recomendador.setText(cliente.getIdClienteRecomendador().getNombre());
+                this.jTextField4_Recomendador.setText(cliente.getIdClienteRecomendador().toString());
             }
         }
         
         if(operacion == Constantes.MODIFICAR || operacion == Constantes.AGREGAR) {
+            this.textAutoCompleter = new TextAutoCompleter(jTextField4_Recomendador);
+            this.textAutoCompleter.setMode(0);
             this.setEditableComponentes(true);
             this.cargarClientes();
         }
@@ -165,6 +169,8 @@ public class PantallaCliente extends javax.swing.JDialog{
         });
 
         jLabel9.setText("Edad:");
+
+        jSpinner1_Edad.setModel(new javax.swing.SpinnerNumberModel(Short.valueOf((short)1), Short.valueOf((short)1), Short.valueOf((short)130), Short.valueOf((short)1)));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Correo:");
@@ -299,7 +305,9 @@ public class PantallaCliente extends javax.swing.JDialog{
 
     private void jButton_GuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarClienteActionPerformed
         //VALIDAR CAMPOS
-        this.clienteRecomendador = (Cliente)this.textAutoCompleter.getItemSelected();
+        //this.clienteRecomendador = (Cliente)this.textAutoCompleter.getItemSelected();
+        //System.out.println(this.jTextField4_Recomendador.toString());
+        this.clienteRecomendador = (Cliente)this.textAutoCompleter.findItem(this.jTextField4_Recomendador.getText());
         if (operacion == Constantes.AGREGAR) {
             if (this.validarCampos(Constantes.AGREGAR)) {
                 if (this.mostrarMensajeDeConfirmacion("¿Desea guardar el cliente?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -330,7 +338,7 @@ public class PantallaCliente extends javax.swing.JDialog{
                 if (this.mostrarMensajeDeConfirmacion("¿Desea actualizar el cliente?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     this.cliente.setNombre(this.jTextField_Nombre.getText());
                     this.cliente.setApellido(this.jTextField1_Apellido.getText());
-                    this.cliente.setEdad((short)this.jSpinner1_Edad.getValue());
+                    this.cliente.setEdad((short)(this.jSpinner1_Edad.getValue()));
                     this.cliente.setCorreo(this.jTextField2_Correo.getText());
                     this.cliente.setCelular(this.jTextField3_Celular.getText());
                     this.cliente.setIdClienteRecomendador(clienteRecomendador);
@@ -387,7 +395,7 @@ public class PantallaCliente extends javax.swing.JDialog{
             return false;
         }
         if (operacion==2) {
-            if((int)((short)this.jSpinner1_Edad.getValue()) <= 0) {
+            if((short)this.jSpinner1_Edad.getValue() <= (short)0) {
             mostrarMensajeDeAdvertencia("Ingrese una edad correcta", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if(operacion==1){
