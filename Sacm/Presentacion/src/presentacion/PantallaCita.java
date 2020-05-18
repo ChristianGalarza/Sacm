@@ -133,7 +133,6 @@ public class PantallaCita extends javax.swing.JDialog{
     
     public void cerrarPantalla() {
         this.setVisible(false);
-        
     }
     
     public void limpiarPantalla() {
@@ -437,7 +436,7 @@ public class PantallaCita extends javax.swing.JDialog{
                         this.mostrarMensajeDeAdvertencia("Cita guardada correctamente", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         this.mostrarMensajeDeAdvertencia("La cita se empalma", JOptionPane.INFORMATION_MESSAGE);
-                        return;
+                        //return;
                     }
 
                 }

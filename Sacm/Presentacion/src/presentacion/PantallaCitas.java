@@ -22,7 +22,7 @@ public class PantallaCitas extends javax.swing.JDialog {
     private IFacadadeNegocio facadadeNegocio;
     private List<Cita> listaDeCitas;
     private Calendar fechaActual;
-    private Calendar fechaActual2;
+    //private Calendar fechaActual2;
     /**
      * Creates new form PantallaCitas
      * @param parent
@@ -35,13 +35,13 @@ public class PantallaCitas extends javax.swing.JDialog {
         this.facadadeNegocio = facadadeNegocio;
         this.fechaActual = Calendar.getInstance();
         fechaActual.add(Calendar.DATE,-1);
-        fechaActual2 = Calendar.getInstance();
+        //fechaActual2 = Calendar.getInstance();
         this.jLabel_Fecha.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
         this.setLocationRelativeTo(null);
     }
     
     public void cargarCitas() {
-        this.listaDeCitas = facadadeNegocio.obtenerCitasPorFecha(fechaActual2.getTime());
+        this.listaDeCitas = facadadeNegocio.obtenerCitasPorFecha(fechaActual.getTime());
         String nombreColumnas [] = {"Fecha","Hora","Nombre","Servicio","Precio"};
         String cita[][]= new String[this.listaDeCitas.size()][5];
         Cita citaAuxiliar;
@@ -65,7 +65,7 @@ public class PantallaCitas extends javax.swing.JDialog {
     
     public void cambiarFecha(int movimiento) {
         this.fechaActual.add(Calendar.DATE, movimiento);
-        this.fechaActual2.add(Calendar.DATE, movimiento);
+        //this.fechaActual2.add(Calendar.DATE, movimiento);
         this.jLabel_Fecha.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
         this.cargarCitas();
     }
