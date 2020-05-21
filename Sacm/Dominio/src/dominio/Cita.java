@@ -39,12 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cita.findByFecha", query = "SELECT c FROM Cita c WHERE c.fecha = :fecha"),
     @NamedQuery(name = "Cita.findByHora", query = "SELECT c FROM Cita c WHERE c.hora = :hora"),
     @NamedQuery(name = "Cita.findByDuracion", query = "SELECT c FROM Cita c WHERE c.duracion = :duracion"),
+    @NamedQuery(name = "Cita.findByHoraFin", query = "SELECT c FROM Cita c WHERE c.horaFin = :horaFin"),
     @NamedQuery(name = "Cita.findByCostoTotal", query = "SELECT c FROM Cita c WHERE c.costoTotal = :costoTotal")})
 public class Cita implements Serializable {
-
-    @Column(name = "horaFin")
-    @Temporal(TemporalType.TIME)
-    private Date horaFin;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,6 +58,9 @@ public class Cita implements Serializable {
     @Column(name = "duracion")
     @Temporal(TemporalType.TIME)
     private Date duracion;
+    @Column(name = "horaFin")
+    @Temporal(TemporalType.TIME)
+    private Date horaFin;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costoTotal")
     private Float costoTotal;
@@ -112,6 +112,14 @@ public class Cita implements Serializable {
         this.duracion = duracion;
     }
 
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
+    }
+
     public Float getCostoTotal() {
         return costoTotal;
     }
@@ -135,17 +143,6 @@ public class Cita implements Serializable {
 
     public void setIdCliente(Cliente idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public String getServicios() {
-        String servicios = "<html>";
-        for (int i = 0; i < this.servicioderelajacionList.size(); i++) {
-            servicios += this.servicioderelajacionList.get(i).toString();
-            if (i != this.servicioderelajacionList.size() - 1) {
-                servicios += "<br>";
-            }
-        }
-        return servicios+="</html>";
     }
 
     @Override
@@ -172,13 +169,15 @@ public class Cita implements Serializable {
     public String toString() {
         return "dominio.Cita[ idCita=" + idCita + " ]";
     }
-
-    public Date getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Date horaFin) {
-        this.horaFin = horaFin;
+    public String getServicios() {
+        String servicios = "<html>";
+        for (int i = 0; i < this.servicioderelajacionList.size(); i++) {
+            servicios += this.servicioderelajacionList.get(i).toString();
+            if (i != this.servicioderelajacionList.size() - 1) {
+                servicios += "<br>";
+            }
+        }
+        return servicios+="</html>";
     }
     
 }

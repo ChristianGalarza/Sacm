@@ -35,11 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Servicioderelajacion.findByIdServicioDeRelajacion", query = "SELECT s FROM Servicioderelajacion s WHERE s.idServicioDeRelajacion = :idServicioDeRelajacion"),
     @NamedQuery(name = "Servicioderelajacion.findByNombre", query = "SELECT s FROM Servicioderelajacion s WHERE s.nombre = :nombre"),
     @NamedQuery(name = "Servicioderelajacion.findByDuracion", query = "SELECT s FROM Servicioderelajacion s WHERE s.duracion = :duracion"),
-    @NamedQuery(name = "Servicioderelajacion.findByCosto", query = "SELECT s FROM Servicioderelajacion s WHERE s.costo = :costo")})
+    @NamedQuery(name = "Servicioderelajacion.findByCosto", query = "SELECT s FROM Servicioderelajacion s WHERE s.costo = :costo"),
+    @NamedQuery(name = "Servicioderelajacion.findByDescripcion", query = "SELECT s FROM Servicioderelajacion s WHERE s.descripcion = :descripcion")})
 public class Servicioderelajacion implements Serializable {
-
-    @Column(name = "descripcion")
-    private String descripcion;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,6 +53,8 @@ public class Servicioderelajacion implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costo")
     private Float costo;
+    @Column(name = "descripcion")
+    private String descripcion;
     @ManyToMany(mappedBy = "servicioderelajacionList")
     private List<Cita> citaList;
 
@@ -97,6 +97,14 @@ public class Servicioderelajacion implements Serializable {
         this.costo = costo;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     @XmlTransient
     public List<Cita> getCitaList() {
         return citaList;
@@ -129,14 +137,6 @@ public class Servicioderelajacion implements Serializable {
     @Override
     public String toString() {
         return this.getNombre();
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
     
 }

@@ -34,7 +34,7 @@ public class PantallaCitas extends javax.swing.JDialog {
         initComponents();
         this.facadadeNegocio = facadadeNegocio;
         this.fechaActual = Calendar.getInstance();
-//        fechaActual.add(Calendar.DATE,-1);
+        fechaActual.add(Calendar.DATE,-1);
         //fechaActual2 = Calendar.getInstance();
         this.jLabel_Fecha.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
         this.setLocationRelativeTo(null);
@@ -53,6 +53,8 @@ public class PantallaCitas extends javax.swing.JDialog {
             cita[i][2] = citaAuxiliar.getIdCliente().getNombre() + " " + 
                     citaAuxiliar.getIdCliente().getApellido();
             cita[i][3] = citaAuxiliar.getServicios();
+            System.out.println("Prueba");
+            System.out.println(citaAuxiliar.getServicioderelajacionList().size());
             cita[i][4] = citaAuxiliar.getCostoTotal().toString();
             if (saltosdeLinea > cita[i][3].split("<br>").length) {
                 saltosdeLinea = cita[i][3].split("<br>").length;
