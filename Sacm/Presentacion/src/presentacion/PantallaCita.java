@@ -431,18 +431,17 @@ public class PantallaCita extends javax.swing.JDialog{
                     this.cita.setHora(this.facadadeNegocio.convertirHoras((int) this.jSpinner_HoraCita.getValue(), (int) this.jSpinner_MinutosCita.getValue()));
                     this.cita.setServicioderelajacionList(listaDeServicioDerelajacionResumen);
                     this.cita.setHoraFin(this.facadadeNegocio.sumarHora(this.cita.getHora(), this.cita.getDuracion()));
-                    if (!this.facadadeNegocio.verificarCitasEmpalmadas(cita).contains(cita)) {
+                    if (this.facadadeNegocio.verificarCitasEmpalmadas(cita).isEmpty()) {
                         this.facadadeNegocio.agregarCita(cita);
                         this.mostrarMensajeDeAdvertencia("Cita guardada correctamente", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         this.mostrarMensajeDeAdvertencia("La cita se empalma", JOptionPane.INFORMATION_MESSAGE);
-                        //return;
+                        return;
                     }
-
                 }
-
+            } else {
+                return;
             }
-
         } else if (operacion == Constantes.MODIFICAR) {
             if (this.validarCampos()) {
                 if (this.mostrarMensajeDeConfirmacion("¿Desea actualizar la cita?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -457,19 +456,15 @@ public class PantallaCita extends javax.swing.JDialog{
                         this.facadadeNegocio.actualizarCita(this.cita);
                         this.mostrarMensajeDeAdvertencia("Cita actualizada correctamente", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        for (Cita citasEmpalmadasLista : this.facadadeNegocio.verificarCitasEmpalmadas(cita)) {
-                            if (citasEmpalmadasLista.equals(cita)) {
-                                this.facadadeNegocio.actualizarCita(this.cita);
-                                this.mostrarMensajeDeAdvertencia("Cita actualizada correctamente", JOptionPane.INFORMATION_MESSAGE);
-                                return;
-                            }
+                        if(this.facadadeNegocio.verificarCitasEmpalmadas(cita).size() == 1 && this.facadadeNegocio.verificarCitasEmpalmadas(cita).contains(cita)){
+                            this.facadadeNegocio.actualizarCita(this.cita);
+                            this.mostrarMensajeDeAdvertencia("Cita actualizada correctamente", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            this.mostrarMensajeDeAdvertencia("La cita se empalma", JOptionPane.INFORMATION_MESSAGE);
+                            return;
                         }
-                        this.mostrarMensajeDeAdvertencia("La cita se empalma", JOptionPane.INFORMATION_MESSAGE);
-                        return;
                     }
-
                 }
-
             } else {
                 return;
             }
@@ -497,6 +492,8 @@ public class PantallaCita extends javax.swing.JDialog{
         if (fila != -1) {
             this.listaDeServicioDerelajacionResumen.remove(fila);
             this.cargarResumen();
+            this.calcularTiempoDeCita();
+            this.calculcularCostoTotal();
         } else {
             this.mostrarMensajeDeAdvertencia("Seleccione un servicio", JOptionPane.INFORMATION_MESSAGE);
         }

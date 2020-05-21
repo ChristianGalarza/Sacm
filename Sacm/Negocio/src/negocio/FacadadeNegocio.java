@@ -127,6 +127,7 @@ public class FacadadeNegocio implements IFacadadeNegocio{
         String fecha = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH));
         String horaInicio = new SimpleDateFormat("HH:mm:SS").format(cita.getHora());
         String horaFin = new SimpleDateFormat("HH:mm:SS").format(cita.getHoraFin());
+        /*
         String query = "SELECT c\n"
                 + "FROM Cita c\n"
                 + "where c.fecha = \""+fecha+"\" \n"
@@ -134,6 +135,17 @@ public class FacadadeNegocio implements IFacadadeNegocio{
                 + "or (c.horaFin > \""+horaInicio+"\" and c.hora < \""+horaFin+"\")) \n"
                 + "or (\""+horaInicio+"\" > c.hora and c.hora < c.horaFin) \n"
                 + "or (\""+horaFin+"\" > c.hora and c.hora < c.horaFin))";
+        */
+        String query = "SELECT c\n "
+                + "FROM Cita c\n"
+                + "where c.fecha = \""+fecha+"\"\n"
+                + "and (((c.hora < \""+horaInicio+"\" and \""+horaInicio+"\" < c.horaFin) \n"
+                + "or (c.hora < \""+horaFin+"\" and \""+horaFin+"\" < c.horaFin) \n"
+                + "or (c.hora = \""+horaInicio+"\" and c.horaFin = \""+horaFin+"\"))\n"
+                + "or ((c.hora > \""+horaInicio+"\" and \""+horaFin+"\" > c.hora) \n"
+                + "or (c.horaFin > \""+horaInicio+"\" and \""+horaFin+"\" > c.horaFin) \n"
+                + "or (c.hora = \""+horaInicio+"\" and c.horaFin = \""+horaFin+"\")))";
+                
         return this.citaControl.generarQuery(query);
     }
 
