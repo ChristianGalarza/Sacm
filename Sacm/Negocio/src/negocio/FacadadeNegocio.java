@@ -139,12 +139,12 @@ public class FacadadeNegocio implements IFacadadeNegocio{
         String query = "SELECT c\n "
                 + "FROM Cita c\n"
                 + "where c.fecha = \""+fecha+"\"\n"
-                + "and ((c.hora < \""+horaInicio+"\" and \""+horaInicio+"\" < c.horaFin) \n"
+                + "and (((c.hora < \""+horaInicio+"\" and \""+horaInicio+"\" < c.horaFin) \n"
                 + "or (c.hora < \""+horaFin+"\" and \""+horaFin+"\" < c.horaFin) \n"
                 + "or (c.hora = \""+horaInicio+"\" and c.horaFin = \""+horaFin+"\"))\n"
                 + "or ((c.hora > \""+horaInicio+"\" and \""+horaFin+"\" > c.hora) \n"
                 + "or (c.horaFin > \""+horaInicio+"\" and \""+horaFin+"\" > c.horaFin) \n"
-                + "or (c.hora = \""+horaInicio+"\" and c.horaFin = \""+horaFin+"\"))";
+                + "or (c.hora = \""+horaInicio+"\" and c.horaFin = \""+horaFin+"\")))";
                 
         return this.citaControl.generarQuery(query);
     }

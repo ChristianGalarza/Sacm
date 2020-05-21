@@ -34,7 +34,7 @@ public class PantallaCitas extends javax.swing.JDialog {
         initComponents();
         this.facadadeNegocio = facadadeNegocio;
         this.fechaActual = Calendar.getInstance();
-        fechaActual.add(Calendar.DATE,-1);
+//        fechaActual.add(Calendar.DATE,-1);
         //fechaActual2 = Calendar.getInstance();
         this.jLabel_Fecha.setText(facadadeNegocio.formatearFecha(fechaActual.getTime()));
         this.setLocationRelativeTo(null);
